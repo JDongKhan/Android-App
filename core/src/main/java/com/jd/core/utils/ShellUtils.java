@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @author by TOME .
- * @data on      2018/6/25 13:48
- * @describe ${Shell 相关}
+ * Shell 相关
  */
 
 public final  class ShellUtils {

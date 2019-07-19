@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * @author by TOME .
- * @data on      2018/6/25 11:12
- * @describe ${App相关工具类}
+ * App相关工具类
  */
 
 public class AppUtils {

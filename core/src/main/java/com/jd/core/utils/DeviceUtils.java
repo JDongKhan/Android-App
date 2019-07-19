@@ -16,9 +16,7 @@ import static android.Manifest.permission.ACCESS_WIFI_STATE;
 import static android.Manifest.permission.INTERNET;
 
 /**
- * @author by TOME .
- * @data on      2018/6/25 13:41
- * @describe ${设备相关}
+ * 设备相关
  */
 
 public class DeviceUtils {

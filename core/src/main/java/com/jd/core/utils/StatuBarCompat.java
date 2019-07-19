@@ -21,11 +21,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /*
- * @project: JiaBaoMo
- * @author: Administrator 
- * @date: 2017-06-28 11:49 
- * @version V1.0  
- * @desc 沉浸式状态栏 兼容4.4
+ * 沉浸式状态栏 兼容4.4
  */
 public class StatuBarCompat {
     private static final String TAG = "StatuBarCompat";

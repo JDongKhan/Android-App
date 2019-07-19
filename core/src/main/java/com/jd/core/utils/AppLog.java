@@ -7,7 +7,6 @@ import com.jd.core.BuildConfig;
 /**
  * 日志打印管理
  *
- * @author liubp
  */
 public class AppLog {
     private AppLog() {

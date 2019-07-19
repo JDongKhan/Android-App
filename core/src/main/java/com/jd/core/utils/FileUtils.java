@@ -12,8 +12,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Desc:文件和文件夹操作类
- * Created by cheegon on 6/27/2017.
+ * 文件和文件夹操作类
  */
 
 public final class FileUtils {
