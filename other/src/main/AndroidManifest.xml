@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jd.other">
+    <application>
+        <service
+            android:process=":remote"
+            android:name="com.jd.other.service.JDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.jd.other.service.JDService"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

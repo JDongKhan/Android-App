@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jd.list">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+        <activity android:name=".activity.ListActivity" />
+
+        <activity android:name=".activity.ListMainActivity" />
+
+        <activity android:name=".activity.DemoActivity" />
+
+    </application>
+
+
+
+</manifest>

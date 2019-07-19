@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <include android:id="@+id/navigation_bar" layout="@layout/navigation_bar"/>
+
+
+
+    <com.jd.core.view.BannerPager
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:duration="3000"
+        app:indicatorGravity="center|bottom"
+        app:indicatorSelected="@drawable/android_indicator_selected"
+        app:indicatorUnSelected="@drawable/android_indicator_unselected"
+        app:isAutoPlay="true"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_marginTop="100px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="home"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/router_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="300px"
+                android:text="跳转路由"/>
+
+
+            <Button
+                android:id="@+id/network"
+                android:layout_toRightOf="@+id/router_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="300px"
+                android:text="网络"/>
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_toRightOf="@+id/network"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="300px"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

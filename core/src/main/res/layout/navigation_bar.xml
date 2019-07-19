@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/header_layout"
+	android:layout_width="match_parent"
+	android:layout_height="64dp"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/navigation_back"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="20dp"
+		android:gravity="center"
+		android:visibility="visible">
+		<TextView
+			android:id="@+id/navigation_back_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="back"
+			android:textColor="#ffffff"
+			android:textSize="10sp"/>
+	</LinearLayout>
+
+
+	<LinearLayout
+		android:id="@+id/top_head"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		android:gravity="center"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/navigation_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxEms="10"
+			android:text="title"
+			android:singleLine="true"
+			android:textColor="#ffffff"
+			android:textSize="20sp"/>
+
+		<LinearLayout
+			android:id="@+id/navigation_detail_layout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="bottom"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/navigation_detail"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:maxEms="16"
+				android:singleLine="true"
+				android:textColor="#ffffff"
+				android:textSize="5sp"
+				android:visibility="gone"/>
+
+			<ImageView
+				android:id="@+id/navigation_detail_img"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:visibility="gone"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/function_menu"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:layout_marginRight="20dp"
+		android:minWidth="25dp"
+		android:orientation="horizontal"
+		android:padding="20dp"/>
+
+</RelativeLayout>
