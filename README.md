@@ -1,5 +1,5 @@
 # JDApp
- 这是一款Android快速开发框架
+ 这是一款基于androidx 的 Android快速开发框架
  
  技术栈：initiator + arouter + butterknife + retrofit2 + okhttp3 + rxjava2 + glide + logger 
  

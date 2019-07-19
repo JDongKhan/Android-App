@@ -1,13 +1,11 @@
 package com.jd.core.base;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.jd.core.utils.StatuBarCompat;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
