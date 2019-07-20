@@ -13,8 +13,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.jd.core.R;
 import com.jd.core.view.NavigationBar;
 
-import java.util.zip.Inflater;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -34,7 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.base_layout);
         //导航
         this.navigationBar = this.findViewById(R.id.navigation_bar);

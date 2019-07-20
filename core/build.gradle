@@ -58,4 +58,6 @@ dependencies {
     api rootProject.ext.dependencies.rxjava2_rxandroid
     api rootProject.ext.dependencies.rxjava2
 
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha1'
+
 }

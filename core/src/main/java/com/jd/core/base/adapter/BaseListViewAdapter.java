@@ -12,13 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public abstract class LazyAdapter extends BaseAdapter {
+public abstract class BaseListViewAdapter extends BaseAdapter {
 	private List<?> dataList;
 	private LayoutInflater layoutInflater;
 	private Class<?>[] viewHolders = null;
 	public Context context;
 
-	public LazyAdapter(Context context, List<?> dataList,Class<? extends  BaseViewHolder>... viewHolders) {
+	public BaseListViewAdapter(Context context, List<?> dataList, Class<? extends  BaseViewHolder>... viewHolders) {
 		this.dataList = dataList;
 		this.context = context;
 		this.layoutInflater = LayoutInflater.from(context);
@@ -71,14 +71,14 @@ public abstract class LazyAdapter extends BaseAdapter {
 			try {
 				viewHold = (BaseViewHolder)viewHolderClass.newInstance();
 			} catch (IllegalAccessException e) {
-				Log.e("LazyAdapter",e.getMessage());
+				Log.e("BaseListViewAdapter",e.getMessage());
 			} catch (InstantiationException e) {
-				Log.e("LazyAdapter",e.getMessage());
+				Log.e("BaseListViewAdapter",e.getMessage());
 			}
 			int layout_id = viewHold.layout_id();
 			convertView = layoutInflater.inflate(layout_id, null);
 			if (convertView == null) {
-				Log.e("LazyAdapter", "请在[" + BaseViewHolder.class + "]类里面实现layout_id");
+				Log.e("BaseListViewAdapter", "请在[" + BaseViewHolder.class + "]类里面实现layout_id");
 			} else {
 				// -------------------绑定控件到viewHolder------------------------------------
 				viewHold.onCreateView(convertView);

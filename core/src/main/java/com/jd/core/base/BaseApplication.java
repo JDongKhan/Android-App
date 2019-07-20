@@ -25,6 +25,7 @@ public class BaseApplication extends Application {
         //MultiDex分包方法 必须最先初始化
         MultiDex.install(this);
 
+
         if (isDebugARouter) {
             ARouter.openLog();
             ARouter.openDebug();

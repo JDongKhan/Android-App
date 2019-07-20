@@ -8,19 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-import android.content.Context;
 
 import android.content.Intent;
-import android.view.LayoutInflater;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jd.core.base.BaseFragment;
-import com.jd.core.view.BannerPager;
 import com.jd.home.R;
 import com.jd.home.R2;
-import com.jd.home.adapter.QuickAdapter;
-import com.jd.home.adapter.RecyclerViewAdapter;
+import com.jd.home.adapter.HomeAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,49 +58,33 @@ public class HomeFragment extends BaseFragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         //添加Android自带的分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(),DividerItemDecoration.VERTICAL));
+
+        List<Integer> viewHolders = new ArrayList();
+        viewHolders.add(R.layout.banner_pager);
+        viewHolders.add(R.layout.home_list_item);
+
         //设置适配器
-        recyclerView.setAdapter(new RecyclerViewAdapter(this.getContext(),this.items));
+        recyclerView.setAdapter(new HomeAdapter(this.getActivity(),this.items,viewHolders));
     }
 
     private void initData() {
+        Map<String,Object> item0 = new HashMap<>();
+        items.add(item0);
+
         Map<String,Object> item1 = new HashMap<>();
         item1.put("title","LIST DEMO");
-        item1.put("action",  new RecyclerViewAdapter.OnListClick(){
-            @Override
-            public void onClick() {
-
-            }
-        });
         items.add(item1);
 
         Map<String,Object> item2 = new HashMap<>();
         item2.put("title","GRID DEMO");
-        item2.put("action",  new RecyclerViewAdapter.OnListClick(){
-            @Override
-            public void onClick() {
-
-            }
-        });
         items.add(item2);
 
         Map<String,Object> item3 = new HashMap<>();
         item3.put("title","SECOND_GRID");
-        item3.put("action",  new RecyclerViewAdapter.OnListClick(){
-            @Override
-            public void onClick() {
-
-            }
-        });
         items.add(item3);
 
         Map<String,Object> item4 = new HashMap<>();
         item4.put("title","自定义List");
-        item4.put("action",  new RecyclerViewAdapter.OnListClick(){
-            @Override
-            public void onClick() {
-
-            }
-        });
         items.add(item4);
     }
 

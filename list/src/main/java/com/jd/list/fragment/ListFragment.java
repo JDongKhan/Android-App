@@ -9,12 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.jd.core.base.BaseFragment;
-import com.jd.core.base.adapter.LazyAdapter;
+import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.list.R;
 import com.jd.list.R2;
 import com.jd.list.activity.DemoActivity;
 import com.jd.list.activity.ListActivity;
-import com.jd.list.activity.ListMainActivity;
 import com.jd.list.utils.BaseUtils;
 import com.jd.list.viewholders.ListViewHolder;
 
@@ -46,7 +45,7 @@ public class ListFragment extends BaseFragment {
         this.navigationBar.setTitle("功能");
 
         this.initData();
-        LazyAdapter lazyAdapter = new LazyAdapter(this.getActivity(),this.items, ListViewHolder.class) {
+        BaseListViewAdapter lazyAdapter = new BaseListViewAdapter(this.getActivity(),this.items, ListViewHolder.class) {
             @Override
             public int indexOfLayoutsAtPosition(int position) {
                 return 0;

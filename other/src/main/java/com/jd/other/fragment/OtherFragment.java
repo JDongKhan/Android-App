@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jd.core.base.BaseFragment;
-import com.jd.core.base.adapter.LazyAdapter;
+import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.core.network.ServiceGenerator;
 import com.jd.other.R;
 import com.jd.other.R2;
@@ -55,7 +55,7 @@ public class OtherFragment extends BaseFragment {
         this.navigationBar.setTitle("功能");
 
         this.initData();
-        LazyAdapter lazyAdapter = new LazyAdapter(this.getActivity(),this.items, OtherViewHolder.class) {
+        BaseListViewAdapter lazyAdapter = new BaseListViewAdapter(this.getActivity(),this.items, OtherViewHolder.class) {
             @Override
             public int indexOfLayoutsAtPosition(int position) {
                 return 0;

@@ -1,8 +1,6 @@
 package com.jd.home.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
