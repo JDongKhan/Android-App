@@ -21,38 +21,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.jd.core.base.BaseActivity;
 import com.jd.list.R;
+import com.jd.list.R2;
 import com.jd.list.utils.BaseUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.OnClick;
 
-public class ListMainActivity extends AppCompatActivity {
+public class ListMainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_activity_main);
-
-        final Button firstListDemoButton = findViewById(R.id.list_demo_button);
-        final Button firstGridDemoButton = findViewById(R.id.grid_demo_button);
-
-        createClickListener(firstListDemoButton, BaseUtils.TYPE_LIST);
-        createClickListener(firstGridDemoButton, BaseUtils.TYPE_GRID);
-
-        final Button secondListDemoButton = findViewById(R.id.list_second_demo_button);
-        final Button secondGridDemoButton = findViewById(R.id.grid_second_demo_button);
-
-        createClickListener(secondListDemoButton, BaseUtils.TYPE_SECOND_LIST);
-        createClickListener(secondGridDemoButton, BaseUtils.TYPE_SECOND_GRID);
+    protected int getLayoutId() {
+        return R.layout.list_activity_main;
     }
 
-    private void createClickListener(Button button, final int demoType) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startDemo(demoType);
-            }
-        });
+    @Override
+    protected void initView() {
+    }
+
+    @OnClick(R2.id.list_demo_button)
+    public void onClick1(View view) {
+        startDemo(BaseUtils.TYPE_LIST);
+    }
+
+    @OnClick(R2.id.grid_demo_button)
+    public void onClick2(View view) {
+        startDemo(BaseUtils.TYPE_GRID);
+    }
+
+    @OnClick(R2.id.list_second_demo_button)
+    public void onClick3(View view) {
+        startDemo(BaseUtils.TYPE_SECOND_LIST);
+    }
+
+    @OnClick(R2.id.grid_second_demo_button)
+    public void onClick4(View view) {
+        startDemo(BaseUtils.TYPE_SECOND_GRID);
     }
 
     private void startDemo(int demoType) {

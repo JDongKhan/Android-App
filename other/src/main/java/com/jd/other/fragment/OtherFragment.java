@@ -4,15 +4,26 @@ package com.jd.other.fragment;
 
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jd.core.base.BaseFragment;
 import com.jd.core.base.adapter.LazyAdapter;
+import com.jd.core.network.ServiceGenerator;
 import com.jd.other.R;
 import com.jd.other.R2;
+import com.jd.other.network.BookService;
 import com.jd.other.viewholder.OtherViewHolder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,24 +38,22 @@ public class OtherFragment extends BaseFragment {
     @BindView(R2.id.simpleListView)
     ListView listView;
 
-    private List<Map<String,String>> items = new ArrayList<>();
+    private List<Map<String,Object>> items = new ArrayList<>();
 
     public OtherFragment() {
         // Required empty public constructor
     }
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutId() {
         return R.layout.fragment_other;
     }
 
     @Override
-    protected void initTitle() {
+    protected void initView(View view) {
+        this.navigationBar.setBackViewHidden(true);
+        this.navigationBar.setTitle("功能");
 
-    }
-
-    @Override
-    protected void initView() {
         this.initData();
         LazyAdapter lazyAdapter = new LazyAdapter(this.getActivity(),this.items, OtherViewHolder.class) {
             @Override
@@ -53,28 +62,96 @@ public class OtherFragment extends BaseFragment {
             }
         };
         listView.setAdapter(lazyAdapter); //导入
+
+        //点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Map<String,Object> item = OtherFragment.this.items.get(position);
+                OnOtherClick click = (OnOtherClick) item.get("action");
+                if (click != null) {
+                    click.onClick();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    protected boolean preferredNavigationBarHidden() {
+        return false;
     }
 
     private void initData() {
-        Map<String,String> item1 = new HashMap<>();
+        Map<String,Object> item1 = new HashMap<>();
         item1.put("title","网络");
-        item1.put("router","");
+        item1.put("action",  new OnOtherClick(){
+            @Override
+            public void onClick() {
+                testNetwork();
+            }
+        });
         items.add(item1);
 
-        Map<String,String> item2 = new HashMap<>();
-        item2.put("title","列表");
-        item1.put("router","");
+        Map<String,Object> item2 = new HashMap<>();
+        item2.put("title","路由");
+        item2.put("action",  new OnOtherClick(){
+            @Override
+            public void onClick() {
+                ARouter.getInstance().build("/test/activity1").navigation();
+            }
+        });
         items.add(item2);
 
-        Map<String,String> item3 = new HashMap<>();
+        Map<String,Object> item3 = new HashMap<>();
         item3.put("title","功能菜单");
-        item1.put("router","");
+        item3.put("action",  new OnOtherClick(){
+            @Override
+            public void onClick() {
+
+            }
+        });
         items.add(item3);
 
-        Map<String,String> item4 = new HashMap<>();
+        Map<String,Object> item4 = new HashMap<>();
         item4.put("title","设置");
-        item1.put("router","");
+        item4.put("action",  new OnOtherClick(){
+            @Override
+            public void onClick() {
+
+            }
+        });
         items.add(item4);
     }
 
+
+    private void testNetwork() {
+        Call<ResponseBody> call = ServiceGenerator.createService(BookService.class).getShop("63.223.108.42");
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ResponseBody  body = response.body();
+                    if (body != null) {
+                        String s = body.string();
+                        Log.e("network", s);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("network",t.toString());
+            }
+        });
+    }
+
+
+    ///////////////////////////////////////
+    public interface  OnOtherClick {
+        public void onClick();
+    }
 }

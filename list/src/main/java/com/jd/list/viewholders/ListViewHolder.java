@@ -1,15 +1,16 @@
-package com.jd.other.viewholder;
+package com.jd.list.viewholders;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jd.core.base.adapter.BaseViewHolder;
-import com.jd.other.R;
+import com.jd.list.R;
+
 
 import java.util.Map;
 
-public class OtherViewHolder implements BaseViewHolder {
+public class ListViewHolder implements BaseViewHolder {
     ImageView imageView;
     TextView textView1;
     TextView textView2;

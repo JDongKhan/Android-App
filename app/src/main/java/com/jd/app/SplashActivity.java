@@ -19,11 +19,6 @@ public class SplashActivity extends BaseActivity implements Animator.AnimatorLis
     }
 
     @Override
-    protected void initTitle() {
-
-    }
-
-    @Override
     protected void initView() {
         // 渐变动画
         ivSplash.setAlpha(0.3f);
@@ -49,4 +44,12 @@ public class SplashActivity extends BaseActivity implements Animator.AnimatorLis
 
     @Override public void onAnimationRepeat(Animator animation) {
     }
+
+    /**
+     * 隐藏导航
+     */
+    protected boolean preferredNavigationBarHidden() {
+        return true;
+    }
+
 }

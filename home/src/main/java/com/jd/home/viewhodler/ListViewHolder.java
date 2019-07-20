@@ -1,22 +1,22 @@
-package com.jd.other.viewholder;
+package com.jd.home.viewhodler;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jd.core.base.adapter.BaseViewHolder;
-import com.jd.other.R;
+import com.jd.home.R;
 
 import java.util.Map;
 
-public class OtherViewHolder implements BaseViewHolder {
+public class ListViewHolder implements BaseViewHolder {
     ImageView imageView;
     TextView textView1;
     TextView textView2;
 
     @Override
     public int layout_id() {
-        return R.layout.list_item;
+        return R.layout.home_list_item;
     }
 
     @Override

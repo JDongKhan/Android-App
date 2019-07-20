@@ -43,11 +43,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     @Override
-    protected void initTitle() {
-
-    }
-
-    @Override
     protected void initView() {
 
         //初始化数据
@@ -132,6 +127,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         item1.put("title","首页");
         item1.put("image",R.drawable.icon_one_selected);
         item1.put("selectedImage",R.mipmap.tab_home_selected);
+        item1.put("fragment",new HomeFragment());
         items.add(item1);
 
 
@@ -139,18 +135,21 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         item2.put("title","列表");
         item2.put("image",R.drawable.icon_two_selected);
         item2.put("selectedImage",R.mipmap.tab_home_selected);
+        item2.put("fragment",new ListFragment());
         items.add(item2);
 
         Map<String,Object> item3 = new HashMap<>();
         item3.put("title","功能菜单");
         item3.put("image",R.drawable.icon_three_selected);
         item3.put("selectedImage",R.mipmap.tab_home_selected);
+        item3.put("fragment",new OtherFragment());
         items.add(item3);
 
         Map<String,Object> item4 = new HashMap<>();
         item4.put("title","设置");
         item4.put("image",R.drawable.icon_four_selected);
         item4.put("selectedImage",R.mipmap.tab_home_selected);
+        item4.put("fragment",new SettingFragment());
         items.add(item4);
     }
     /******************************* viewpage  **********************************/
@@ -170,8 +169,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
-        //由于页面已经固定,故这里把Adapter需要的fragment提前创建
-        private Fragment[] mFragments = new Fragment[]{new HomeFragment(), new ListFragment(), new OtherFragment(),new SettingFragment()};
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -179,13 +176,21 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
         @Override
         public Fragment getItem(int position) {
-            return mFragments[position];
+            Fragment fragment = (Fragment) MainActivity.this.items.get(position).get("fragment");
+            return fragment;
         }
 
         @Override
         public int getCount() {
             return 4;
         }
+    }
+
+    /**
+     * 隐藏导航
+     */
+    protected boolean preferredNavigationBarHidden() {
+        return true;
     }
 
 

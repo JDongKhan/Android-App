@@ -51,6 +51,9 @@ dependencies {
     //集成模式下需要编译器生成路由通信的代码
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
 
+    // 社区依赖的第三方库
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9+'
+
     api project(':core')
 
 }

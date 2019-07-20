@@ -18,16 +18,16 @@ package com.jd.list.activity;
 
 import android.os.Bundle;
 
+import com.jd.core.base.BaseActivity;
 import com.jd.list.R;
 import com.jd.list.adapters.CardAdapter;
 import com.jd.list.utils.BaseUtils;
 import com.jd.list.utils.DemoConfiguration;
 import com.jd.list.view.shimmer.ShimmerRecyclerView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DemoActivity extends AppCompatActivity {
+public class DemoActivity extends BaseActivity {
 
     public static final String EXTRA_TYPE = "type";
 
@@ -35,18 +35,21 @@ public class DemoActivity extends AppCompatActivity {
     private CardAdapter mAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    protected int getLayoutId() {
         final int type = getType();
-
-        RecyclerView.LayoutManager layoutManager;
-
         final DemoConfiguration demoConfiguration = BaseUtils.getDemoConfiguration(type, this);
-        setTheme(demoConfiguration.getStyleResource());
-        setContentView(demoConfiguration.getLayoutResource());
+        return demoConfiguration.getLayoutResource();
+    }
+
+    @Override
+    protected void initView() {
+        final int type = getType();
+        RecyclerView.LayoutManager layoutManager;
+        final DemoConfiguration demoConfiguration = BaseUtils.getDemoConfiguration(type, this);
+//        setTheme(demoConfiguration.getStyleResource());
         layoutManager = demoConfiguration.getLayoutManager();
-        setTitle(demoConfiguration.getTitleResource());
+
+        this.navigationBar.setTitle(demoConfiguration.getTitleResource());
 
         shimmerRecycler = findViewById(R.id.shimmer_recycler_view);
 
@@ -67,6 +70,7 @@ public class DemoActivity extends AppCompatActivity {
                 loadCards();
             }
         }, 3000);
+
     }
 
     private void loadCards() {

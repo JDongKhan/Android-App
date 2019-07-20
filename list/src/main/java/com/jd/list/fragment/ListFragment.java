@@ -1,26 +1,134 @@
 package com.jd.list.fragment;
 
-import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+
+import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.jd.core.base.BaseFragment;
+import com.jd.core.base.adapter.LazyAdapter;
 import com.jd.list.R;
+import com.jd.list.R2;
+import com.jd.list.activity.DemoActivity;
+import com.jd.list.activity.ListActivity;
+import com.jd.list.activity.ListMainActivity;
+import com.jd.list.utils.BaseUtils;
+import com.jd.list.viewholders.ListViewHolder;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-public class ListFragment extends Fragment {
+public class ListFragment extends BaseFragment {
+
+    @BindView(R2.id.simpleListView)
+    ListView listView;
+
+    private List<Map<String,Object>> items = new ArrayList<>();
 
     public ListFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_list;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+    protected void initView(View view) {
+        this.navigationBar.setBackViewHidden(true);
+        this.navigationBar.setTitle("功能");
+
+        this.initData();
+        LazyAdapter lazyAdapter = new LazyAdapter(this.getActivity(),this.items, ListViewHolder.class) {
+            @Override
+            public int indexOfLayoutsAtPosition(int position) {
+                return 0;
+            }
+        };
+        listView.setAdapter(lazyAdapter); //导入
+
+        //点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Map<String,Object> item = ListFragment.this.items.get(position);
+                OnListClick click = (OnListClick) item.get("action");
+                if (click != null) {
+                    click.onClick();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    protected boolean preferredNavigationBarHidden() {
+        return false;
+    }
+
+    private void initData() {
+        Map<String,Object> item1 = new HashMap<>();
+        item1.put("title","LIST DEMO");
+        item1.put("action",  new OnListClick(){
+            @Override
+            public void onClick() {
+                startDemo(BaseUtils.TYPE_LIST);
+            }
+        });
+        items.add(item1);
+
+        Map<String,Object> item2 = new HashMap<>();
+        item2.put("title","GRID DEMO");
+        item2.put("action",  new OnListClick(){
+            @Override
+            public void onClick() {
+                startDemo(BaseUtils.TYPE_GRID);
+            }
+        });
+        items.add(item2);
+
+        Map<String,Object> item3 = new HashMap<>();
+        item3.put("title","SECOND_GRID");
+        item3.put("action",  new OnListClick(){
+            @Override
+            public void onClick() {
+                startDemo(BaseUtils.TYPE_SECOND_GRID);
+            }
+        });
+        items.add(item3);
+
+        Map<String,Object> item4 = new HashMap<>();
+        item4.put("title","自定义List");
+        item4.put("action",  new OnListClick(){
+            @Override
+            public void onClick() {
+                push(ListActivity.class);
+            }
+        });
+        items.add(item4);
+    }
+
+    private void push(Class<? extends AppCompatActivity> activityClass) {
+        Intent intent = new Intent(this.getActivity(),activityClass);
+        this.startActivity(intent);
+    }
+
+    private void startDemo(int demoType) {
+        Intent intent = new Intent(this.getActivity(), DemoActivity.class);
+        intent.putExtra(DemoActivity.EXTRA_TYPE, demoType);
+        startActivity(intent);
+    }
+
+    ///////////////////////////////////////
+    public interface  OnListClick {
+        public void onClick();
     }
 
 }

@@ -5,8 +5,6 @@
             android:orientation="vertical"
              tools:context="com.jd.other.fragment.OtherFragment">
 
-    <include android:id="@+id/navigation_bar" layout="@layout/navigation_bar"/>
-
     <ListView
         android:id="@+id/simpleListView"
         android:layout_width="match_parent"

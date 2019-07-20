@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/header_layout"
 	android:layout_width="match_parent"
-	android:layout_height="64dp"
-	android:orientation="vertical">
+	android:layout_height="match_parent"
+	android:paddingTop="20dp">
 
 	<LinearLayout
 		android:id="@+id/navigation_back"
@@ -11,14 +10,20 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
 		android:layout_centerVertical="true"
-		android:layout_marginLeft="20dp"
+		android:layout_marginLeft="0dp"
 		android:gravity="center"
+		android:orientation="horizontal"
 		android:visibility="visible">
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_back_white" />
 		<TextView
 			android:id="@+id/navigation_back_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="back"
+			android:text="返回"
 			android:textColor="#ffffff"
 			android:textSize="10sp"/>
 	</LinearLayout>
@@ -70,7 +75,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/function_menu"
+		android:id="@+id/navigation_rightView"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"

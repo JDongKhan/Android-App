@@ -1,33 +1,31 @@
 package com.jd.home.fragment;
 
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import android.content.Context;
-import android.util.Log;
 
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jd.core.base.BaseFragment;
 import com.jd.core.view.BannerPager;
 import com.jd.home.R;
 import com.jd.home.R2;
-import com.jd.home.service.BookService;
-import com.jd.home.utils.ServiceGenerator;
+import com.jd.home.adapter.QuickAdapter;
+import com.jd.home.adapter.RecyclerViewAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -35,103 +33,91 @@ import java.util.List;
  */
 public class HomeFragment extends BaseFragment {
 
-    @BindView(R2.id.textView)
-    public TextView textView;
 
-    @BindView(R2.id.router_test)
-    public Button routerTest;
+    @BindView(R2.id.recyclerView)
+    RecyclerView recyclerView;
 
-    @BindView(R2.id.network)
-    public Button network;
+    private List<Map<String,Object>> items = new ArrayList<>();
 
-    @BindView(R2.id.imageView)
-    public ImageView imageView;
-
-    @BindView(R2.id.banner)
-    BannerPager bannerPager;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-
-    @OnClick(R2.id.router_test)
-    public void click() {
-        ARouter.getInstance().build("/test/activity1").navigation();
-    }
-
-
-    @OnClick(R2.id.network)
-    public void click2() {
-        Call<ResponseBody> call = ServiceGenerator.createService(BookService.class).getShop("63.223.108.42");
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ResponseBody  body = response.body();
-                    if (body != null) {
-                        String s = body.string();
-                        Log.e("network", s);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("network",t.toString());
-            }
-        });
-    }
-
-
-
     @Override
-    protected int getLayout() {
+    protected int getLayoutId() {
         return R.layout.fragment_home;
     }
 
     @Override
-    protected void initTitle() {
-
+    protected void initView(View view) {
+        this.initList();
     }
 
-    @Override
-    protected void initView() {
-        textView.setText("hello");
-        // 加载应用资源
-        int resource = R.drawable.default_icon;
-        Glide.with(this).load(resource).into(imageView);
+    private void initList() {
+        this.initData();
+        // 设置布局
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+        //设置滑动方向：纵向
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //添加Android自带的分割线
+        recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(),DividerItemDecoration.VERTICAL));
+        //设置适配器
+        recyclerView.setAdapter(new RecyclerViewAdapter(this.getContext(),this.items));
+    }
 
-        List<Integer> list = new ArrayList<>();
-        list.add(R.mipmap.ic_banner_1);
-        list.add(R.mipmap.ic_banner_2);
-        list.add(R.mipmap.ic_banner_3);
-        list.add(R.mipmap.ic_banner_4);
-        list.add(R.mipmap.ic_banner_5);
-        bannerPager.setAdapter(new IndexBannderAdapter(this.getContext(), list));
-
-        bannerPager.setOnPageClickListener(new BannerPager.OnPageClickListener() {
+    private void initData() {
+        Map<String,Object> item1 = new HashMap<>();
+        item1.put("title","LIST DEMO");
+        item1.put("action",  new RecyclerViewAdapter.OnListClick(){
             @Override
-            public void onPageClick(int position) {
+            public void onClick() {
 
             }
         });
+        items.add(item1);
+
+        Map<String,Object> item2 = new HashMap<>();
+        item2.put("title","GRID DEMO");
+        item2.put("action",  new RecyclerViewAdapter.OnListClick(){
+            @Override
+            public void onClick() {
+
+            }
+        });
+        items.add(item2);
+
+        Map<String,Object> item3 = new HashMap<>();
+        item3.put("title","SECOND_GRID");
+        item3.put("action",  new RecyclerViewAdapter.OnListClick(){
+            @Override
+            public void onClick() {
+
+            }
+        });
+        items.add(item3);
+
+        Map<String,Object> item4 = new HashMap<>();
+        item4.put("title","自定义List");
+        item4.put("action",  new RecyclerViewAdapter.OnListClick(){
+            @Override
+            public void onClick() {
+
+            }
+        });
+        items.add(item4);
+    }
+
+    private void push(Class<? extends AppCompatActivity> activityClass) {
+        Intent intent = new Intent(this.getActivity(),activityClass);
+        this.startActivity(intent);
     }
 
 
-    private class IndexBannderAdapter extends BannerPager.BannerAdapter {
-
-        public IndexBannderAdapter(Context context, List list) {
-            super(context, list);
-        }
-
-        @Override
-        public int getCount() {
-            return super.getCount();
-        }
+    @Override
+    protected boolean preferredNavigationBarHidden() {
+        return true;
     }
 
 }

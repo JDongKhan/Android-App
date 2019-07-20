@@ -1,4 +1,4 @@
-package com.jd.home.utils;
+package com.jd.core.network;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +32,7 @@ public class ServiceGenerator {
         if (authToken != null) {
             httpClient.addInterceptor(new Interceptor() {
                 @Override
-                public Response intercept(Interceptor.Chain chain) throws IOException {
+                public Response intercept(Chain chain) throws IOException {
                     Request original = chain.request();
 
                     // Request customization: add request headers

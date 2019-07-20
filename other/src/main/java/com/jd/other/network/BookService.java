@@ -1,4 +1,4 @@
-package com.jd.home.service;
+package com.jd.other.network;
 
 
 import okhttp3.ResponseBody;

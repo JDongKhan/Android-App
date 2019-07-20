@@ -12,8 +12,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.jd.core.R;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,11 +42,11 @@ public class StatuBarCompat {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
-            if (contentView.findViewById(R.id.statu_title) != null) {
-                contentView.findViewById(R.id.statu_title).setBackgroundColor(statusColor);
+            if (contentView.findViewById(android.R.id.title) != null) {
+                contentView.findViewById(android.R.id.title).setBackgroundColor(statusColor);
             } else {
                 View statusBarView = new View(activity);
-                statusBarView.setId(R.id.statu_title);
+                statusBarView.setId(android.R.id.title);
                 ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         StatuBarCompat.getStatusBarHeight(activity));
                 statusBarView.setBackgroundColor(statusColor);

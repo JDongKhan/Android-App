@@ -25,13 +25,7 @@ public class ListActivity extends BaseActivity {
     }
 
     @Override
-    protected void initTitle() {
-
-    }
-
-    @Override
     protected void initView() {
-        this.setImmeriveStatuBar();
         // 1.准备集合数据
         String[] strs = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "09",
                 "89", "77", "55", "ut", "sd", "gj", "gjk", "qw", "jhk" };
