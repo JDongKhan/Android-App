@@ -33,7 +33,7 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Map> {
             return;
         } else {
             TextView textView = (TextView) viewHolder.getView(R.id.text1);
-            textView.setText(item.get("title").toString());
+            textView.setText(item.get("title") == null ? "" : item.get("title").toString());
         }
     }
 
