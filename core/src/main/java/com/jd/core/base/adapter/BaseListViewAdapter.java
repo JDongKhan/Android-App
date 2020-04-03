@@ -96,4 +96,17 @@ public abstract class BaseListViewAdapter extends BaseAdapter {
 
 	public abstract int indexOfLayoutsAtPosition(int position);
 
+
+	/*****************************************************/
+	public static interface BaseViewHolder {
+
+		public int layout_id();
+
+		public void onCreateView(View view);
+
+		public void onStart(Object data);
+	}
+
+
 }
+

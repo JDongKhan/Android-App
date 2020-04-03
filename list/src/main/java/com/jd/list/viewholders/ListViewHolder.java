@@ -4,13 +4,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jd.core.base.adapter.BaseViewHolder;
+import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.list.R;
 
 
 import java.util.Map;
 
-public class ListViewHolder implements BaseViewHolder {
+public class ListViewHolder implements BaseListViewAdapter.BaseViewHolder {
     ImageView imageView;
     TextView textView1;
     TextView textView2;

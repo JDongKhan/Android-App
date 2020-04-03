@@ -18,7 +18,7 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder unBinder;
-    public BaseActivity mActivity ;
+    public BaseActivity mActivity;
     public ImmersionBar mImmersionBar;
     protected boolean isDestory = false;
 
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //沉浸式状态栏
         initImmersionBar();
         //setImmeriveStatuBar();
-        mActivity = this ;
+        mActivity = this;
 
         initView();
     }
@@ -67,6 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         // 所有子类都将继承这些相同的属性,暂时先不加,会导入全部状态栏都一致
         // mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.bar_grey).init();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -74,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             unBinder.unbind();
         }
         //必须调用该方法，防止内存泄漏
-        if (mImmersionBar != null){
+        if (mImmersionBar != null) {
             mImmersionBar.destroy();
         }
         isDestory = true;
