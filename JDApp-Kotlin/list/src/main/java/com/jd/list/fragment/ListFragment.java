@@ -10,7 +10,6 @@ import android.widget.ListView;
 import com.jd.core.base.BaseFragment;
 import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.list.R;
-import com.jd.list.R2;
 import com.jd.list.activity.DemoActivity;
 import com.jd.list.activity.ListActivity;
 import com.jd.list.utils.BaseUtils;

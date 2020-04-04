@@ -11,7 +11,6 @@ import android.widget.RelativeLayout
 
 import com.gyf.barlibrary.ImmersionBar
 import com.jd.core.R
-import com.jd.core.R2
 import com.jd.core.utils.AppLog
 import com.jd.core.view.NavigationBar
 

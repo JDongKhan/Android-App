@@ -12,7 +12,6 @@ import android.view.View
 
 import com.jd.core.base.BaseFragment
 import com.jd.home.R
-import com.jd.home.R2
 import com.jd.home.adapter.HomeAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 

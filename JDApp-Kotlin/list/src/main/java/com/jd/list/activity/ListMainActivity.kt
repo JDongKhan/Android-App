@@ -24,7 +24,6 @@ import android.view.View
 
 import com.jd.core.base.BaseActivity
 import com.jd.list.R
-import com.jd.list.R2
 import com.jd.list.utils.BaseUtils
 import kotlinx.android.synthetic.main.list_activity_main.*
 
