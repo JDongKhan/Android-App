@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JDApp</string>
+    <string name="home_tab">首页</string>
+    <string name="my_tab">我的</string>
+    <string name="app_loading">加载中...</string>
+    <string name="switch_env_title">环境切换</string>
+</resources>

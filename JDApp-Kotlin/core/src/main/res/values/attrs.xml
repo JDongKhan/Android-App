@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BannerPager">
+        <attr name="indicatorSelected" format="reference" />
+        <attr name="indicatorUnSelected" format="reference" />
+        <attr name="isAutoPlay" format="boolean" />
+        <attr name="isLoop" format="boolean" />
+        <attr name="duration" />
+        <attr name="indicatorGravity">
+            <flag name="left" value="3" />
+            <flag name="top" value="48" />
+            <flag name="right" value="5" />
+            <flag name="bottom" value="80" />
+            <flag name="center" value="17" />
+            <flag name="center_horizontal" value="1" />
+            <flag name="center_vertical" value="16" />
+        </attr>
+        <attr name="indicatorLayoutMargin" format="dimension" />
+        <attr name="indicatorLayoutMarginLeft" format="dimension" />
+        <attr name="indicatorLayoutMarginTop" format="dimension" />
+        <attr name="indicatorLayoutMarginRight" format="dimension" />
+        <attr name="indicatorLayoutMarginBottom" format="dimension" />
+        <attr name="indicatorMargin" format="dimension" />
+        <attr name="indicatorMarginLeft" format="dimension" />
+        <attr name="indicatorMarginTop" format="dimension" />
+        <attr name="indicatorMarginRight" format="dimension" />
+        <attr name="indicatorMarginBottom" format="dimension" />
+    </declare-styleable>
+
+</resources>

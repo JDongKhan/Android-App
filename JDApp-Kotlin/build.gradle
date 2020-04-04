@@ -1,0 +1,59 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from:"config.gradle"
+
+buildscript {
+    ext.kotlin_version = '1.3.71'
+
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+
+        //butterknife
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
+
+        //initiator
+        classpath 'com.renny.initiator:plugin:1.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        
+    }
+}
+
+
+//configurations.all {
+//    resolutionStrategy {
+//        force 'com.android.support:support-v4:27.1.1'
+//    }
+//}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+// 保证dex_files文件中指定的文件都加载到Main Dex中
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex'
+        dx.additionalParameters += "--main-dex-list=$projectDir/dex_files".toString()
+    }
+}
