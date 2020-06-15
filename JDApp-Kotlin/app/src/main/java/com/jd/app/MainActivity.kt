@@ -156,7 +156,7 @@ class MainActivity : BaseActivity(), ViewPager.OnPageChangeListener {
         }
 
         override fun getCount(): Int {
-            return 4
+            return items.size
         }
     }
 

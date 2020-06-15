@@ -25,6 +25,14 @@ abstract class BaseFragment : Fragment() {
     //contentView
     lateinit var mContentView: View
 
+    /**
+     * 是否启用懒加载，此属性仅对BaseLazyLoadFragment有效
+     */
+    private var isLazyLoad: Boolean = false
+    set(value) {field = value}
+
+    private  var isPrepare: Boolean = false
+
     /***************************** 抽象方法  */
     /**
      * 获取当前Activity的UI布局
@@ -64,6 +72,10 @@ abstract class BaseFragment : Fragment() {
         return view
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
     /**
      * 返回view
      * @param view
@@ -71,9 +83,17 @@ abstract class BaseFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        isPrepare = true;
         initView(view)
     }
 
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isLazyLoad) {
+            onVisibleToUser()
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -84,6 +104,16 @@ abstract class BaseFragment : Fragment() {
         super.onDestroy()
         if (mImmersionBar != null) {
             mImmersionBar!!.destroy()
+        }
+    }
+
+    /**
+     * 判断是否需要加载数据
+     */
+    private fun onVisibleToUser() {
+        // 如果已经初始化完成，并且显示给用户
+        if (isPrepare && getUserVisibleHint()) {
+            loadData();
         }
     }
 
@@ -106,5 +136,10 @@ abstract class BaseFragment : Fragment() {
      * 初始化数据
      */
     protected abstract fun initView(view: View)
+
+    /**
+     * 懒加载数据
+     */
+    protected  abstract  fun loadData()
 
 }

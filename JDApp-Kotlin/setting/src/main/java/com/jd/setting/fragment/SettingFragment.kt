@@ -20,7 +20,11 @@ class SettingFragment : BaseFragment() {
         get() = R.layout.fragment_setting
 
     override fun initView(view: View) {
+        this.navigationBar.setBackViewHidden(true)
+        this.navigationBar.setTitle("功能")
 
     }
+
+
 
 }// Required empty public constructor

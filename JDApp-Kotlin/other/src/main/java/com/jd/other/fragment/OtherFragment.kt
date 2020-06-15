@@ -10,6 +10,7 @@ import retrofit2.Response
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jd.core.base.BaseFragment
@@ -101,6 +102,7 @@ class OtherFragment : BaseFragment() {
 
     private fun testNetwork() {
         val call = ServiceGenerator.createService(BookService::class.java).getShop("63.223.108.42")
+        Toast.makeText(activity,"网络请求开始",Toast.LENGTH_LONG).show();
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 try {
@@ -109,6 +111,7 @@ class OtherFragment : BaseFragment() {
                         val s = body.string()
                         Log.e("network", s)
                     }
+                    Toast.makeText(activity,"网络请求成功",Toast.LENGTH_LONG).show();
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -117,6 +120,7 @@ class OtherFragment : BaseFragment() {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("network", t.toString())
+                Toast.makeText(activity,"网络请求失败",Toast.LENGTH_LONG).show();
             }
         })
     }
