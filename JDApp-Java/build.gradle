@@ -10,7 +10,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.6.3'
 
         //butterknife
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'

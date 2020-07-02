@@ -23,8 +23,16 @@ android {
 
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation(name: 'library1-release', ext: 'aar')
+
     //MultiDex分包方法
     api rootProject.ext.dependencies.multidex
     //    implementation rootProject.ext.dependencies.appcompat_v7

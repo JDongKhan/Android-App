@@ -5,7 +5,7 @@
         <attr name="indicatorUnSelected" format="reference" />
         <attr name="isAutoPlay" format="boolean" />
         <attr name="isLoop" format="boolean" />
-        <attr name="duration" />
+        <attr name="duration" format="integer" />
         <attr name="indicatorGravity">
             <flag name="left" value="3" />
             <flag name="top" value="48" />

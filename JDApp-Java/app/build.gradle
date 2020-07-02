@@ -3,6 +3,7 @@ apply plugin: 'com.jakewharton.butterknife'
 
 apply plugin: 'initiator'
 
+
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
     defaultConfig {
@@ -30,6 +31,12 @@ android {
     // 保证其他的lib没有被preDex
     dexOptions {
         preDexLibraries = false
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs','../core/libs'
     }
 }
 
