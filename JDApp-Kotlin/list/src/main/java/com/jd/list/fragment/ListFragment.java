@@ -123,6 +123,11 @@ public class ListFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @Override
+    protected void loadData() {
+
+    }
+
     ///////////////////////////////////////
     public interface  OnListClick {
         public void onClick();

@@ -56,6 +56,9 @@ class OtherFragment : BaseFragment() {
         }
     }
 
+    override fun loadData() {
+    }
+
 
     override fun preferredNavigationBarHidden(): Boolean {
         return false

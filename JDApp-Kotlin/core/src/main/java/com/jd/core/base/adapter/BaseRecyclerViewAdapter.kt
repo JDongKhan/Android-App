@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -30,12 +31,16 @@ abstract class BaseRecyclerViewAdapter<T>(private val mContext: Context, private
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as BaseViewHolder
         this.convert(viewHolder, mData[position])
-        //添加点击事件
-        viewHolder.itemView.setOnClickListener {
-            if (itemClickListener != null) {
-                itemClickListener!!.onItemClick(this@BaseRecyclerViewAdapter, viewHolder.itemView, position)
+
+        if (viewHolder.itemView !is AdapterView<*>) {
+            //添加点击事件
+            viewHolder.itemView.setOnClickListener {
+                if (itemClickListener != null) {
+                    itemClickListener!!.onItemClick(this@BaseRecyclerViewAdapter, viewHolder.itemView, position)
+                }
             }
         }
+
     }
 
     override fun getItemViewType(position: Int): Int {

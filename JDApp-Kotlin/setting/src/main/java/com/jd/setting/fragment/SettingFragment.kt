@@ -25,6 +25,8 @@ class SettingFragment : BaseFragment() {
 
     }
 
+    override fun loadData() {
+    }
 
 
 }// Required empty public constructor
