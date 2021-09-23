@@ -1,10 +1,14 @@
 package com.jd.core.base.adapter
 
 import android.content.Context
+import android.media.Image
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -12,24 +16,20 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseRecyclerViewAdapter<T>(private val mContext: Context, private val mData: List<T>, private val viewHolders: List<Int>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val mLayoutInflater: LayoutInflater
+    private val mLayoutInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var itemClickListener: OnItemClickListener? = null
 
-    init {
-        mLayoutInflater = LayoutInflater.from(mContext)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        //TODO 寻找优雅的解耦方案 ，因为ViewHolder实例化需要先取view，所以无法从ViewHolder的实例去取布局，故使用了mapper方案
-        val layout_id = this.viewHolders[viewType]
-        val view = LayoutInflater.from(parent.context).inflate(layout_id, parent, false)
-        val vh = BaseViewHolder(view)
+        //TODO 后续寻找优雅的解耦方案 ，因为ViewHolder实例化需要先取view，所以无法从ViewHolder的实例去取布局，故使用了mapper方案
+        val layoutId = this.viewHolders[viewType]
+        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
+        val vh = CommonViewHolder(view)
         vh.itemType = viewType
         return vh
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val viewHolder = holder as BaseViewHolder
+        val viewHolder = holder as CommonViewHolder
         this.convert(viewHolder, mData[position])
 
         if (viewHolder.itemView !is AdapterView<*>) {
@@ -47,11 +47,6 @@ abstract class BaseRecyclerViewAdapter<T>(private val mContext: Context, private
         return this.indexOfLayoutsAtPosition(position)
     }
 
-    //让外面告诉我映射关系
-    protected abstract fun indexOfLayoutsAtPosition(position: Int): Int
-
-    protected abstract fun convert(viewHolder: BaseViewHolder, item: T)
-
     override fun getItemCount(): Int {
         return mData.size
     }
@@ -60,16 +55,40 @@ abstract class BaseRecyclerViewAdapter<T>(private val mContext: Context, private
         this.itemClickListener = itemClickListener
     }
 
-    /** */
-    class ViewHolderMapper(internal var layout_id: Int, internal var viewHolderClass: Class<out BaseViewHolder>)
+    //让外面告诉我映射关系
+    protected abstract fun indexOfLayoutsAtPosition(position: Int): Int
 
-    /** */
-    class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    protected abstract fun convert(viewHolder: CommonViewHolder, item: T)
+
+
+
+    /** 内部类 */
+    class CommonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var mViews: SparseArray<View> = SparseArray();
         var itemType: Int = 0
 
-        fun getView(viewID: Int): View {
-            return itemView.findViewById(viewID)
+        fun getView(viewId: Int): View? {
+            var view: View? = mViews.get(viewId);
+            if (view == null) {
+                view =  itemView.findViewById(viewId)
+                mViews.put(viewId,view)
+            }
+            return view;
         }
+
+        fun setText(viewId: Int,text: String): CommonViewHolder {
+           var tv: TextView = getView(viewId) as TextView
+            tv.text = text
+            return this
+        }
+
+        fun setImageResource(viewId: Int,resId: Int): CommonViewHolder {
+            var imageView:ImageView = getView(viewId) as ImageView
+            imageView.setImageResource(resId)
+            return this
+        }
+
+
     }
 
 

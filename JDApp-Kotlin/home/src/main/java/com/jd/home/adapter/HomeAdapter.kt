@@ -16,6 +16,7 @@ import kotlin.collections.ArrayList
 
 class HomeAdapter(context: Context, mData: List<Map<*,*>>, viewHolders: List<Int>) : BaseRecyclerViewAdapter<Map<*, *>>(context, mData, viewHolders) {
 
+    //菜单
     private var menus: Array<Map<String, Any>> = arrayOf(
             mapOf("title" to "今日新品","image" to R.drawable.red_heart),
             mapOf("title" to "热卖品类","image" to R.drawable.tag_bao),
@@ -35,7 +36,7 @@ class HomeAdapter(context: Context, mData: List<Map<*,*>>, viewHolders: List<Int
         }  else 2
     }
 
-    override fun convert(viewHolder: BaseRecyclerViewAdapter.BaseViewHolder, item: Map<*, *>) {
+    override fun convert(viewHolder: BaseRecyclerViewAdapter.CommonViewHolder, item: Map<*, *>) {
         if (viewHolder.itemType == 0) {
             val bannerPager = viewHolder.itemView as BannerPager
             bannerPager.adapter = IndexBannderAdapter(bannerPager.context, initBanner())
