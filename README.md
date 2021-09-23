@@ -7,7 +7,7 @@
 
  arouter： 路由
 
- butterknife：用于处理Android view绑定、事件等。
+ butterknife：用于处理Android view绑定、事件等。(kotlin版本无)
 
  okhttp3：网络请求
 
