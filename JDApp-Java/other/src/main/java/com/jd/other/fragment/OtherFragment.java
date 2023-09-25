@@ -3,7 +3,6 @@ package com.jd.other.fragment;
 
 
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +18,6 @@ import com.jd.core.base.BaseFragment;
 import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.core.network.ServiceGenerator;
 import com.jd.other.R;
-import com.jd.other.R2;
 import com.jd.other.network.BookService;
 import com.jd.other.viewholder.OtherViewHolder;
 
@@ -35,7 +33,6 @@ import java.util.Map;
  */
 public class OtherFragment extends BaseFragment {
 
-    @BindView(R2.id.simpleListView)
     ListView listView;
 
     private List<Map<String,Object>> items = new ArrayList<>();
@@ -51,6 +48,7 @@ public class OtherFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
+        listView = view.findViewById(R.id.simpleListView);
         this.navigationBar.setBackViewHidden(true);
         this.navigationBar.setTitle("功能");
 

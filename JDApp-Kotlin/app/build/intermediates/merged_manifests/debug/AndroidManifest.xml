@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.jd.app"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="28" />
+
+    <dist:module dist:instant="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- android:networkSecurityConfig="@xml/network_security_config" -->
+    <application
+        android:name="com.jd.app.JDApplication"
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true" >
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.jd.app.SplashActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.jd.app.MainActivity" >
+        </activity>
+        <activity android:name="com.jd.home.activity.HomeDetailActivity" />
+        <activity android:name="com.jd.list.activity.ListActivity" />
+        <activity android:name="com.jd.list.activity.ListMainActivity" />
+        <activity android:name="com.jd.list.activity.DemoActivity" />
+
+        <service
+            android:name="com.jd.other.service.JDService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.jd.other.service.JDService" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

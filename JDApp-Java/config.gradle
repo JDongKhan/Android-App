@@ -41,10 +41,6 @@ ext {
             "arouter_compiler"               : 'com.alibaba:arouter-compiler:1.1.4',
             "arouter_annotation"             : 'com.alibaba:arouter-annotation:1.0.4',
 
-            //黄油刀
-            "butterknife_compiler"           : 'com.jakewharton:butterknife-compiler:10.1.0',
-            "butterknife"                    : 'com.jakewharton:butterknife:10.1.0',
-
             //网络
             //retrofit2包含okhttp
             //"okhttp3"                       : 'com.squareup.okhttp3:okhttp:3.9.0',

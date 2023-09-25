@@ -13,11 +13,9 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.jd.core.R;
 import com.jd.core.view.NavigationBar;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private Unbinder unBinder;
+
     public BaseActivity mActivity;
     public ImmersionBar mImmersionBar;
     protected boolean isDestory = false;
@@ -49,7 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             this.contentView = contentView;
         }
 
-        unBinder = ButterKnife.bind(this);
         //沉浸式状态栏
         initImmersionBar();
         //setImmeriveStatuBar();
@@ -71,9 +68,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (unBinder != null) {
-            unBinder.unbind();
-        }
         //必须调用该方法，防止内存泄漏
         if (mImmersionBar != null) {
             mImmersionBar.destroy();

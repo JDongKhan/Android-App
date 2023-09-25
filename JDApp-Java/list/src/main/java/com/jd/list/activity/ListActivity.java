@@ -9,14 +9,9 @@ import android.widget.ListView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jd.core.base.BaseActivity;
 import com.jd.list.R;
-import com.jd.list.R2;
-
-import butterknife.BindView;
 
 @Route(path = "/test/activity1")
 public class ListActivity extends BaseActivity {
-
-    @BindView(R2.id.listView1)
     public ListView listView;
 
     @Override
@@ -26,6 +21,7 @@ public class ListActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        listView = findViewById(R.id.listView1);
         // 1.准备集合数据
         String[] strs = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "09",
                 "89", "77", "55", "ut", "sd", "gj", "gjk", "qw", "jhk" };

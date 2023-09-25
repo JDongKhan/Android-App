@@ -1,0 +1,43 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:3:1-20:12
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:3:1-20:12
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:3:1-20:12
+	package
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:4:5-26
+		INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+		INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:3:11-69
+application
+ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:6:5-16:19
+	android:supportsRtl
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:8:9-35
+	android:allowBackup
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:7:9-35
+activity#com.jd.list.activity.ListActivity
+ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:10:9-59
+	android:name
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:10:19-56
+activity#com.jd.list.activity.ListMainActivity
+ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:12:9-63
+	android:name
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:12:19-60
+activity#com.jd.list.activity.DemoActivity
+ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:14:9-59
+	android:name
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml:14:19-56
+uses-sdk
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+		INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+		ADDED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml
+		INJECTED from /Users/sn/Documents/Github/Android-App/JDApp-Java/list/src/main/AndroidManifest.xml

@@ -1,7 +1,6 @@
 package com.jd.list.fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
-import butterknife.BindView;
 
 import android.content.Intent;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.ListView;
 import com.jd.core.base.BaseFragment;
 import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.list.R;
-import com.jd.list.R2;
 import com.jd.list.activity.DemoActivity;
 import com.jd.list.activity.ListActivity;
 import com.jd.list.utils.BaseUtils;
@@ -25,7 +23,6 @@ import java.util.Map;
 
 public class ListFragment extends BaseFragment {
 
-    @BindView(R2.id.simpleListView)
     ListView listView;
 
     private List<Map<String,Object>> items = new ArrayList<>();
@@ -41,6 +38,7 @@ public class ListFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
+        listView = view.findViewById(R.id.simpleListView);
         this.navigationBar.setBackViewHidden(true);
         this.navigationBar.setTitle("功能");
 
