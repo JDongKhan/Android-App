@@ -41,7 +41,8 @@ abstract class BaseFragment : Fragment() {
      */
     protected abstract val layoutId: Int
 
-    override fun onAttach(context: Context?) {
+
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         this.mContext = context
     }

@@ -7,7 +7,7 @@
 
  arouter： 路由
 
- butterknife：用于处理Android view绑定、事件等。(kotlin版本无)
+ ~butterknife：用于处理Android view绑定、事件等。(kotlin版本无)~
 
  okhttp3：网络请求
 
@@ -19,10 +19,23 @@
 
  logger：日志库 
 
- dagger：待用
 
 有待持续完善
 
 
 
 ![1](/Users/jd/Documents/GitHub/Android/JDApp/1.png)
+
+
+#### 环境变更
+
+1、修改build.gradle里面的dependencies的版本
+
+```groovy
+    classpath 'com.android.tools.build:gradle:7.2.1'
+```
+
+2、修改gradle-wrapper.properties里面的gradle的版本
+```properties
+    distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.3-all.zip
+```

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.jd.app-mergeDebugResources-15:/values-en/values-en.xml",
+            "outputFile": "com.jd.app-mergeDebugResources-20:/values-en/values-en.xml",
             "map": [
                 {
                     "source": "/Users/sn/.gradle/caches/transforms-3/2c00b5a46997431fe9862825267b5aad/transformed/jetified-BaseRecyclerViewAdapterHelper-2.9.34/res/values-en/values-en.xml",

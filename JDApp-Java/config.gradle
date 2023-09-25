@@ -82,10 +82,6 @@ ext {
             //6.0权限管理
             "permissionsdispatcher"          : 'com.github.hotchemi:permissionsdispatcher:3.0.1',
             "permissionsdispatcher_processor": 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1',
-            //dagger 暂时没用
-            "dagger"                         : 'com.google.dagger:dagger:2.0.2',
-            "dagger_compiler"                : 'com.google.dagger:dagger-compiler:2.0.2',
-            "javax_annotation"               : 'org.glassfish:javax.annotation:10.0-b28',
             //greendao
             "greendao3"                       : 'org.greenrobot:greendao:3.2.2',
             //Android屏幕适配

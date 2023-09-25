@@ -27,7 +27,7 @@
 19        android:allowBackup="true"
 19-->/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/app/src/main/AndroidManifest.xml:14:9-35
 20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.0.0] /Users/sn/.gradle/caches/transforms-3/204cebc708ec531c6ecb8e4f9a05b541/transformed/core-1.0.0/AndroidManifest.xml:22:18-86
+20-->[androidx.core:core:1.5.0] /Users/sn/.gradle/caches/transforms-3/5e9b0d98a064409390dc8c9669e9674d/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
 21        android:debuggable="true"
 22        android:hardwareAccelerated="true"
 22-->/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/app/src/main/AndroidManifest.xml:15:9-43

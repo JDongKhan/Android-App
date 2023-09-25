@@ -1,9 +1,9 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    xmlns:dist="http://schemas.android.com/apk/distribution"
-4    package="com.jd.app"
+4    package="com.example.tome.framedemomo2"
 5    android:versionCode="1"
-6    android:versionName="1.0" >
+6    android:versionName="1.0.0" >
 7
 8    <uses-sdk
 9        android:minSdkVersion="17"
@@ -27,7 +27,7 @@
 19        android:allowBackup="true"
 19-->/Users/sn/Documents/Github/Android-App/JDApp-Java/app/src/main/AndroidManifest.xml:14:9-35
 20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.0.0] /Users/sn/.gradle/caches/transforms-3/311ab075213ec72dece9e1e2e3b62be6/transformed/core-1.0.0/AndroidManifest.xml:22:18-86
+20-->[androidx.core:core:1.5.0] /Users/sn/.gradle/caches/transforms-3/633b116efbc2c1baba3bd3bc7ca67257/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
 21        android:debuggable="true"
 22        android:hardwareAccelerated="true"
 22-->/Users/sn/Documents/Github/Android-App/JDApp-Java/app/src/main/AndroidManifest.xml:15:9-43
