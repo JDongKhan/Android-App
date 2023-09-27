@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.*
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 
 import com.jd.core.base.BaseFragment
 import com.jd.core.base.adapter.BaseRecyclerViewAdapter
 import com.jd.home.R
 import com.jd.home.activity.HomeDetailActivity
 import com.jd.home.adapter.HomeAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.jd.home.databinding.FragmentHomeBinding
 
 import java.util.ArrayList
 import java.util.HashMap
@@ -24,6 +23,8 @@ import java.util.HashMap
  * A simple [Fragment] subclass.
  */
 class HomeFragment : BaseFragment() {
+
+    private lateinit var binding:FragmentHomeBinding
 
     private var shopImage = intArrayOf(
             R.drawable.shop_0,
@@ -35,10 +36,13 @@ class HomeFragment : BaseFragment() {
     )
     private val items = ArrayList<Map<String, Any>>()
 
-    override val layoutId: Int
-        get() = R.layout.fragment_home
+    override fun layoutView(): View {
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
     override fun initView(view: View) {
+
         this.initList()
     }
 
@@ -54,9 +58,9 @@ class HomeFragment : BaseFragment() {
         viewHolders.add(R.layout.home_fragment_menu)
         viewHolders.add(R.layout.home_fragment_list_item)
 
-        var homeAdapter =  HomeAdapter(this.activity!!, this.items, viewHolders)
+        var homeAdapter =  HomeAdapter(requireContext(), this.items, viewHolders)
         //设置适配器
-        recyclerView.adapter = homeAdapter
+        binding.recyclerView.adapter = homeAdapter
         homeAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(adapter: BaseRecyclerViewAdapter<*>, view: View, position: Int) {
                 push(HomeDetailActivity::class.java)
@@ -66,9 +70,9 @@ class HomeFragment : BaseFragment() {
         // 设置布局
         val gridLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         //设置滑动方向：纵向
-        recyclerView.layoutManager = gridLayoutManager
+        binding.recyclerView.layoutManager = gridLayoutManager
         //添加Android自带的分割线
-        recyclerView.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
 
     }
 

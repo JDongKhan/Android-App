@@ -14,15 +14,15 @@ import com.jd.core.view.NavigationBar
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    lateinit var mActivity: BaseActivity
-    var mImmersionBar: ImmersionBar? = null
-    protected var isDestory = false
+    private lateinit var mActivity: BaseActivity
+    private var mImmersionBar: ImmersionBar? = null
+    private var isDestroyed = false
 
     //导航
     lateinit var navigationBar: NavigationBar
 
     //contentView
-    lateinit var mContentView: View
+    private lateinit var mContentView: View
 
     /*************************** 抽象方法  */
     /**
@@ -30,7 +30,7 @@ abstract class BaseActivity : AppCompatActivity() {
      *
      * @return 布局id
      */
-    protected abstract fun layoutId() : Int
+    protected abstract fun layoutView() : View
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,18 +39,15 @@ abstract class BaseActivity : AppCompatActivity() {
         //导航
         this.navigationBar = this.findViewById(R.id.navigation_bar)
         //隐藏导航
-        if (this.preferredNavigationBarHidden() == true) {
+        if (this.preferredNavigationBarHidden()) {
             this.navigationBar.visibility = View.GONE
         }
 
-        val layout_id = this.layoutId()
-        if (layout_id > 0) {
-            //添加子contentView
-            val rl = this.findViewById<RelativeLayout>(R.id.base_content)
-            val contentView = LayoutInflater.from(this).inflate(layout_id, null)
-            rl.addView(contentView)
-            this.mContentView = contentView
-        }
+        val layoutView = this.layoutView()
+        //添加子contentView
+        val rl = this.findViewById<RelativeLayout>(R.id.base_content)
+        rl.addView(layoutView)
+        this.mContentView = layoutView
         //沉浸式状态栏
         initImmersionBar()
         //setImmeriveStatuBar();
@@ -75,7 +72,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (mImmersionBar != null) {
             mImmersionBar!!.destroy()
         }
-        isDestory = true
+        isDestroyed = true
     }
 
     //隐藏导航

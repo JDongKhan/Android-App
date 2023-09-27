@@ -2,21 +2,25 @@ package com.jd.app
 
 import android.animation.Animator
 import android.content.Intent
+import android.view.View
+import com.jd.app.databinding.ActivitySplashBinding
 
 import com.jd.core.base.BaseActivity
 
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity(), Animator.AnimatorListener {
 
-    override fun layoutId(): Int {
-        return R.layout.activity_splash
+    lateinit var binding: ActivitySplashBinding
+    override fun layoutView(): View {
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun initView() {
+
         // 渐变动画
-        image_splash!!.alpha = 0.3f
-        image_splash!!.animate()
+        binding.imageSplash.alpha = 0.3f
+        binding.imageSplash.animate()
                 .alpha(1.0f)
                 .setDuration(2000)
                 .setListener(this)

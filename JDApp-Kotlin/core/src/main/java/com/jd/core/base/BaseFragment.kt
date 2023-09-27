@@ -39,7 +39,7 @@ abstract class BaseFragment : Fragment() {
      *
      * @return 布局id
      */
-    protected abstract val layoutId: Int
+    protected abstract fun layoutView() : View
 
 
     override fun onAttach(context: Context) {
@@ -56,18 +56,15 @@ abstract class BaseFragment : Fragment() {
         //导航
         this.navigationBar = view.findViewById(R.id.navigation_bar)
         //隐藏导航
-        if (this.preferredNavigationBarHidden() == true) {
+        if (this.preferredNavigationBarHidden()) {
             this.navigationBar.visibility = View.GONE
         }
 
-        val layout_id = this.layoutId
-        if (layout_id > 0) {
-            //添加子contentView
-            val rl = view.findViewById<RelativeLayout>(R.id.base_content)
-            val contentView = inflater.inflate(layout_id, null, false)
-            rl.addView(contentView)
-            this.mContentView = contentView
-        }
+        val layoutView = this.layoutView()
+        //添加子contentView
+        val rl = view.findViewById<RelativeLayout>(R.id.base_content)
+        rl.addView(layoutView)
+        this.mContentView = layoutView
         //沉浸式状态栏
         initImmersionBar()
         return view

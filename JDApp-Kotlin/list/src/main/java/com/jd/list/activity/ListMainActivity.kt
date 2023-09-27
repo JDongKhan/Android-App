@@ -23,31 +23,32 @@ import android.content.Intent
 import android.view.View
 
 import com.jd.core.base.BaseActivity
-import com.jd.list.R
+import com.jd.list.databinding.ListActivityMainBinding
 import com.jd.list.utils.BaseUtils
-import kotlinx.android.synthetic.main.list_activity_main.*
 
 
 class ListMainActivity : BaseActivity() {
 
-    override fun layoutId(): Int {
-        return R.layout.list_activity_main
+    lateinit var binding:ListActivityMainBinding
+    override fun layoutView(): View {
+        binding = ListActivityMainBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun initView() {
-        list_demo_button.setOnClickListener {
+        binding.listDemoButton.setOnClickListener {
             startDemo(BaseUtils.TYPE_LIST)
         }
 
-        grid_demo_button.setOnClickListener {
+        binding.gridDemoButton.setOnClickListener {
             startDemo(BaseUtils.TYPE_GRID)
         }
 
-        list_second_demo_button.setOnClickListener {
+        binding.listSecondDemoButton.setOnClickListener {
             startDemo(BaseUtils.TYPE_SECOND_LIST)
         }
 
-        grid_second_demo_button.setOnClickListener {
+        binding.gridSecondDemoButton.setOnClickListener {
             startDemo(BaseUtils.TYPE_SECOND_GRID)
         }
 

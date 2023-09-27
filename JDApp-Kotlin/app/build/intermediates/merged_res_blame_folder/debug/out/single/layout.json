@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.jd.app-mergeDebugResources-21:/layout/view_main_tab.xml",
+        "source": "com.jd.app-main-24:/layout/view_main_tab.xml"
+    },
+    {
+        "merged": "com.jd.app-mergeDebugResources-21:/layout/activity_splash.xml",
+        "source": "com.jd.app-main-24:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.jd.app-mergeDebugResources-21:/layout/activity_main.xml",
+        "source": "com.jd.app-main-24:/layout/activity_main.xml"
+    }
+]

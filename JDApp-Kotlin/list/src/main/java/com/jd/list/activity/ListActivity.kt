@@ -1,19 +1,22 @@
 package com.jd.list.activity
 
 import android.content.Intent
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jd.core.base.BaseActivity
 import com.jd.list.R
-import kotlinx.android.synthetic.main.list.*
+import com.jd.list.databinding.ListBinding
 
 @Route(path = "/test/activity1")
 class ListActivity : BaseActivity() {
+    private lateinit var binding:ListBinding
 
-    override fun layoutId(): Int {
-        return R.layout.list
+    override fun layoutView(): View {
+        binding = ListBinding.inflate(layoutInflater)
+        return binding.root
     }
     override fun initView() {
         // 1.准备集合数据
@@ -22,8 +25,8 @@ class ListActivity : BaseActivity() {
         val adapter = ArrayAdapter(this,
                 R.layout.item, strs)
         // 3.设置Adapter显示列表
-        listView1!!.adapter = adapter
-        listView1!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        binding.listView1.adapter = adapter
+        binding.listView1.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(this@ListActivity, ListMainActivity::class.java)
             startActivity(intent)
         }

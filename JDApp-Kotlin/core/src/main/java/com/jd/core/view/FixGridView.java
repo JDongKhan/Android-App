@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-class FixGridView extends GridView {
+public class FixGridView extends GridView {
     public FixGridView(Context context) {
         super(context);
     }

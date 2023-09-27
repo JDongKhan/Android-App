@@ -16,8 +16,9 @@ import com.jd.setting.R
  */
 class SettingFragment : BaseFragment() {
 
-    override val layoutId: Int
-        get() = R.layout.fragment_setting
+    override fun layoutView(): View {
+        return  LayoutInflater.from(requireContext()).inflate(R.layout.fragment_setting,null)
+    }
 
     override fun initView(view: View) {
         this.navigationBar.setBackViewHidden(true)

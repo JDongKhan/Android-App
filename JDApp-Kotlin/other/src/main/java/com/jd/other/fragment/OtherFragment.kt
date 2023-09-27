@@ -8,6 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -33,15 +34,15 @@ class OtherFragment : BaseFragment() {
 
     private val items = ArrayList<Map<String, Any>>()
 
-    override val layoutId: Int
-        get() = R.layout.fragment_other
-
+    override fun layoutView(): View {
+        return LayoutInflater.from(requireContext()).inflate(R.layout.fragment_other,null)
+    }
     override fun initView(view: View) {
         this.navigationBar.setBackViewHidden(true)
         this.navigationBar.setTitle("功能")
 
         this.initData()
-        val lazyAdapter = object : BaseListViewAdapter(this.activity!!, this.items, OtherViewHolder::class.java) {
+        val lazyAdapter = object : BaseListViewAdapter(requireActivity(), this.items, OtherViewHolder::class.java) {
             override fun indexOfLayoutsAtPosition(position: Int): Int {
                 return 0
             }
