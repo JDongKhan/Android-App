@@ -48,6 +48,7 @@ dependencies {
     api rootProject.ext.dependencies.retrofit2
     api rootProject.ext.dependencies.converter_gson
     api rootProject.ext.dependencies.logging_interceptor
+    api rootProject.ext.dependencies.adapter_rxjava
     //glide
     api rootProject.ext.dependencies.glide
     api rootProject.ext.dependencies.rxjava2_rxandroid

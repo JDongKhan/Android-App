@@ -44,8 +44,10 @@ ext {
             //网络
             //retrofit2包含okhttp
             //"okhttp3"                       : 'com.squareup.okhttp3:okhttp:3.9.0',
-            "retrofit2"                      : 'com.squareup.retrofit2:retrofit:2.3.0',
-            "converter_gson"                 : 'com.squareup.retrofit2:converter-gson:2.3.0',
+            "retrofit2"                      : 'com.squareup.retrofit2:retrofit:2.6.1',
+            "converter_gson"                 : 'com.squareup.retrofit2:converter-gson:2.4.0',
+            //的Rx依赖包
+            "adapter_rxjava"                 : 'com.squareup.retrofit2:adapter-rxjava2:2.6.1',
             //日志拦截器
             "logging_interceptor"            : 'com.squareup.okhttp3:logging-interceptor:3.4.1',
 
