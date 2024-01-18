@@ -11,7 +11,6 @@ import android.widget.RelativeLayout
 
 import com.gyf.barlibrary.ImmersionBar
 import com.jd.core.R
-import com.jd.core.utils.AppLog
 import com.jd.core.view.NavigationBar
 
 
@@ -95,7 +94,6 @@ abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        AppLog.i("当前运行的fragment:" + javaClass.name)
     }
 
     override fun onDestroy() {

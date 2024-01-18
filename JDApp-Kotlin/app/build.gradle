@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'initiator'
 
 android {
-    compileSdkVersion rootProject.android.compileSdkVersion
+    compileSdk rootProject.android.compileSdkVersion
     defaultConfig {
         applicationId "com.jd.app"
         minSdkVersion rootProject.android.minSdkVersion

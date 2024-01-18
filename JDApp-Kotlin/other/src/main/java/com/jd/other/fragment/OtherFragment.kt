@@ -20,6 +20,7 @@ import com.jd.core.network.ServiceGenerator
 import com.jd.other.R
 import com.jd.other.network.BookService
 import com.jd.other.viewholder.OtherViewHolder
+import com.jd.webview.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_other.*
 
 import java.io.IOException
@@ -92,6 +93,16 @@ class OtherFragment : BaseFragment() {
             }
         }
         items.add(item3)
+
+        val item31 = HashMap<String, Any>()
+        item31["title"] = "webView"
+        item31["action"] = object : OnOtherClick {
+            override fun onClick() {
+                val intent = WebViewActivity.toWebPage(this@OtherFragment.requireContext(),null,"https://baidu.com",false,false)
+                startActivity(intent)
+            }
+        }
+        items.add(item31)
 
         val item4 = HashMap<String, Any>()
         item4["title"] = "设置"

@@ -1,4 +1,4 @@
-#Wed Sep 27 10:44:50 CST 2023
+#Thu Jan 18 18:28:05 CST 2024
 base.0=/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.1=/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/app/build/intermediates/dex/debug/mergeProjectDexDebug/11/classes.dex
 base.2=/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/app/build/intermediates/dex/debug/mergeProjectDexDebug/3/classes.dex

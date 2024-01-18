@@ -3,7 +3,7 @@
 3    package="com.jd.home" >
 4
 5    <uses-sdk
-6        android:minSdkVersion="17"
+6        android:minSdkVersion="18"
 6-->/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/home/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="28" />
 7-->/Users/sn/Documents/Github/Android-App/JDApp-Kotlin/home/src/main/AndroidManifest.xml

@@ -132,17 +132,17 @@ public class OtherFragment extends BaseFragment {
 
 
     private void testNetwork() {
-        ServiceGenerator.getInstance().createService(BookService.class).getShop1("63.223.108.42")
+        ServiceGenerator.getInstance().createService(BookService.class).getShop("63.223.108.42")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Integer>() {
+                .subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.i("1111","onSubscribe");
             }
 
             @Override
-            public void onNext(Integer s) {
+            public void onNext(String s) {
                 Log.i("1111","onNext:"+s);
                 Toast.makeText(OtherFragment.this.getContext(),s,Toast.LENGTH_LONG).show();
             }

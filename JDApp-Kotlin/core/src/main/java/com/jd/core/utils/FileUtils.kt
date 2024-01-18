@@ -2,6 +2,7 @@ package com.jd.core.utils
 
 import android.annotation.SuppressLint
 import android.net.Uri
+import com.jd.core.log.LogUtils
 
 import java.io.Closeable
 import java.io.File
@@ -175,7 +176,7 @@ class FileUtils private constructor() {
                 avatar.mkdirs()
             }
             val file = File(avatar, fileName)
-            AppLog.e("文件路径$file")
+             LogUtils.e("fileUtils","文件路径$file")
             // 檢查文件是否存在
             if (file.exists()) {
                 file.delete()

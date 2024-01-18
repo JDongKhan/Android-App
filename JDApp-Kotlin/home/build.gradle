@@ -5,7 +5,7 @@ apply plugin: 'initiator'
 
 android {
 
-    compileSdkVersion rootProject.android.compileSdkVersion
+    compileSdk rootProject.android.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.android.minSdkVersion

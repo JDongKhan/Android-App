@@ -54,9 +54,9 @@ abstract class BaseListViewAdapter(var context: Context, private val dataList: L
             try {
                 viewHold = viewHolderClass.newInstance() as BaseViewHolder
             } catch (e: IllegalAccessException) {
-                Log.e("BaseListViewAdapter", e.message)
+                e.message?.let { Log.e("BaseListViewAdapter", it) }
             } catch (e: InstantiationException) {
-                Log.e("BaseListViewAdapter", e.message)
+                e.message?.let { Log.e("BaseListViewAdapter", it) }
             }
 
             val layout_id = viewHold!!.layout_id()

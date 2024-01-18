@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.jd.app-mergeDebugResources-20:/values-en/values-en.xml",
+            "outputFile": "com.jd.app-mergeDebugResources-32:/values-en/values-en.xml",
             "map": [
                 {
-                    "source": "/Users/sn/.gradle/caches/transforms-3/2c00b5a46997431fe9862825267b5aad/transformed/jetified-BaseRecyclerViewAdapterHelper-2.9.34/res/values-en/values-en.xml",
+                    "source": "/Users/sn/.gradle/caches/transforms-3/2f8abf4b51d540f0df8a1041f3b7c899/transformed/jetified-BaseRecyclerViewAdapterHelper-2.9.34/res/values-en/values-en.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

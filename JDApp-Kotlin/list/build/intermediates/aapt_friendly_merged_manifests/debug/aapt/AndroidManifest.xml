@@ -3,7 +3,7 @@
     package="com.jd.list" >
 
     <uses-sdk
-        android:minSdkVersion="17"
+        android:minSdkVersion="18"
         android:targetSdkVersion="28" />
 
     <application
