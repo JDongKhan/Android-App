@@ -1,6 +1,5 @@
 package com.jd.other.fragment
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
@@ -9,17 +8,12 @@ import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jd.core.base.BaseFragment
 import com.jd.core.base.adapter.BaseListViewAdapter
-import com.jd.core.network.ServiceGenerator.Companion.instance
-import com.jd.core.network.model.Response
+import com.jd.core.network.Network.Companion.instance
 import com.jd.other.R
 import com.jd.other.network.BookService
 import com.jd.other.viewholder.OtherViewHolder
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import java.util.zip.Inflater
 
 /**
  * A simple [Fragment] subclass.

@@ -10,10 +10,10 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.util.concurrent.TimeUnit
 
-class ServiceGenerator {
+class Network {
     private val retrofit: Retrofit
     private val client: OkHttpClient
-    private val TAG = "ServiceGenerator"
+    private val TAG = "Network"
 
     /**
      * 请求访问quest
@@ -59,14 +59,14 @@ class ServiceGenerator {
         var READ_TIMEOUT = 60
         var WRIT_TIMEOUT = 60
         var CONNECT_TIMEOUT = 60
-        private var serviceGenerator: ServiceGenerator? = null
+        private var serviceGenerator: Network? = null
         @JvmStatic
-        val instance: ServiceGenerator
+        val instance: Network
             get() {
                 if (serviceGenerator == null) {
                     synchronized(Any::class.java) {
                         if (serviceGenerator == null) {
-                            serviceGenerator = ServiceGenerator()
+                            serviceGenerator = Network()
                         }
                     }
                 }
