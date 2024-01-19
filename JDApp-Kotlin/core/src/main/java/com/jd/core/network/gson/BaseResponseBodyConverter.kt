@@ -35,10 +35,7 @@ class BaseResponseBodyConverter<T> internal constructor(gson: Gson, adapter: Typ
                 val errorMsg: String = `object`.getString("errorMsg")
                 throw NetworkException(errorMsg, errorCode)
             }
-            val data: String = `object`.getString("data")
-            if (data == null || "" == data) {
-                null
-            } else adapter.fromJson(data)
+            return adapter.fromJson(jsonString)
         } catch (e: JSONException) {
             e.printStackTrace()
             throw NetworkException(NetworkException.PARSE_ERROR_MSG, NetworkException.PARSE_ERROR)

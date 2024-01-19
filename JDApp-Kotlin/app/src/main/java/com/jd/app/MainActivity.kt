@@ -16,6 +16,7 @@ import com.jd.app.databinding.ActivityMainBinding
 import com.jd.core.base.BaseActivity
 import com.jd.home.fragment.HomeFragment
 import com.jd.list.fragment.ListFragment
+import com.jd.other.fragment.OtherFragment
 import com.jd.setting.fragment.SettingFragment
 
 import java.util.ArrayList

@@ -1,6 +1,7 @@
 package com.jd.other.fragment
 
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -15,6 +16,7 @@ import com.jd.other.viewholder.OtherViewHolder
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import java.util.zip.Inflater
 
@@ -52,8 +54,7 @@ class OtherFragment : BaseFragment() {
     }
 
     override fun layoutView(): View {
-        val layoutId =  R.layout.fragment_other
-        return  Inflate
+        return LayoutInflater.from(requireContext()).inflate(R.layout.fragment_other,null)
     }
 
     override fun preferredNavigationBarHidden(): Boolean {
@@ -92,25 +93,35 @@ class OtherFragment : BaseFragment() {
     }
 
     private fun testNetwork() {
-        instance.createService<BookService>(BookService::class.java).getShop("63.223.108.42")?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())?.subscribe(object : Observer<String?> {
-                override fun onSubscribe(d: Disposable) {
-                    Log.i("1111", "onSubscribe")
-                }
 
-                override fun onNext(s: String) {
-                    Log.i("1111", "onNext:$s")
-                    Toast.makeText(this@OtherFragment.context, s, Toast.LENGTH_LONG).show()
-                }
+        instance.createService<BookService>(BookService::class.java)
+            .getShop("63.223.108.42")
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
+                Toast.makeText(this@OtherFragment.context, it.data, Toast.LENGTH_LONG).show()
+            }
 
-                override fun onError(e: Throwable) {
-                    Log.i("1111", "onError" + e.message)
-                    Toast.makeText(this@OtherFragment.context, e.message, Toast.LENGTH_LONG).show()
-                }
 
-                override fun onComplete() {
-                    Log.i("1111", "onComplete")
-                }
-            })
+
+//            ?.subscribe(object : Observer<String?> {
+//                override fun onSubscribe(d: Disposable) {
+//                    Log.i("1111", "onSubscribe")
+//                }
+//
+//                override fun onNext(s: String) {
+//                    Log.i("1111", "onNext:$s")
+//                    Toast.makeText(this@OtherFragment.context, s, Toast.LENGTH_LONG).show()
+//                }
+//
+//                override fun onError(e: Throwable) {
+//                    Log.i("1111", "onError" + e.message)
+//                    Toast.makeText(this@OtherFragment.context, e.message, Toast.LENGTH_LONG).show()
+//                }
+//
+//                override fun onComplete() {
+//                    Log.i("1111", "onComplete")
+//                }
+//            })
     }
 
     ///////////////////////////////////////

@@ -2,3 +2,10 @@
 JDApp-Kotlin/.gradle/
 JDApp-Java/core/build/
 
+JDApp-Kotlin/core/build/
+JDApp-Kotlin/debug/build/
+JDApp-Kotlin/home/build/
+JDApp-Kotlin/list/build/
+JDApp-Kotlin/other/build/
+JDApp-Kotlin/setting/build/
+JDApp-Kotlin/webview/build/
