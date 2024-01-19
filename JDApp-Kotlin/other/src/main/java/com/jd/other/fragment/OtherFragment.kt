@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.jd.core.base.BaseFragment
 import com.jd.core.base.adapter.BaseListViewAdapter
 import com.jd.core.network.ServiceGenerator.Companion.instance
+import com.jd.core.network.model.Response
 import com.jd.other.R
 import com.jd.other.network.BookService
 import com.jd.other.viewholder.OtherViewHolder
@@ -93,35 +94,13 @@ class OtherFragment : BaseFragment() {
     }
 
     private fun testNetwork() {
-
-        instance.createService<BookService>(BookService::class.java)
-            .getShop("63.223.108.42")
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
-                Toast.makeText(this@OtherFragment.context, it.data, Toast.LENGTH_LONG).show()
-            }
-
-
-
-//            ?.subscribe(object : Observer<String?> {
-//                override fun onSubscribe(d: Disposable) {
-//                    Log.i("1111", "onSubscribe")
-//                }
-//
-//                override fun onNext(s: String) {
-//                    Log.i("1111", "onNext:$s")
-//                    Toast.makeText(this@OtherFragment.context, s, Toast.LENGTH_LONG).show()
-//                }
-//
-//                override fun onError(e: Throwable) {
-//                    Log.i("1111", "onError" + e.message)
-//                    Toast.makeText(this@OtherFragment.context, e.message, Toast.LENGTH_LONG).show()
-//                }
-//
-//                override fun onComplete() {
-//                    Log.i("1111", "onComplete")
-//                }
-//            })
+        val result =  instance.createService(BookService::class.java).getShop("63.223.108.42")
+        result?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
+        val  s = result?.subscribe({
+            Toast.makeText(this@OtherFragment.context, it.data, Toast.LENGTH_LONG).show()
+        }) {
+            Toast.makeText(this@OtherFragment.context, it.message, Toast.LENGTH_LONG).show()
+        }
     }
 
     ///////////////////////////////////////
