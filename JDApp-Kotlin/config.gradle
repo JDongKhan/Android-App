@@ -1,3 +1,22 @@
+import groovy.json.JsonSlurper
+
+//这里可以远程下发版本，用以控制app升级，适合团队管理
+def reponse =
+        getNetworkData(
+                'http://t.weather.itboy.net/api/weather/city/101030100','GET')
+
+println "服务端配置:${reponse}"
+
+def getNetworkData(String url,String method) {
+    //发送http请求
+    def connection = new URL(url).openConnection()
+    connection.setRequestMethod(method)
+    connection.connect()
+    def response = connection.content.text
+    //将 json 转化为实体对象
+    def jsonSluper = new JsonSlurper()
+    return jsonSluper.parseText(response)
+}
 
 ext {
     isModule = false
