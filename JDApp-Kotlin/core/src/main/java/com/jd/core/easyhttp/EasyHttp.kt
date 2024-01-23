@@ -76,7 +76,8 @@ class EasyHttp private constructor() {
 
     companion object {
         private var easyOk: EasyHttp? = null
-        private val instance: EasyHttp?
+        @JvmStatic
+        val instance: EasyHttp
             get() {
                 if (easyOk == null) {
                     synchronized(EasyHttp::class.java) {
@@ -85,7 +86,7 @@ class EasyHttp private constructor() {
                         }
                     }
                 }
-                return easyOk
+                return easyOk!!
             }
 
         fun get(): GetBuilder {

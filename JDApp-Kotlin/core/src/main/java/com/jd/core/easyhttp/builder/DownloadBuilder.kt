@@ -193,7 +193,7 @@ class DownloadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
         return this
     }
 
-    override fun params(params: Map<String?, String?>?): DownloadBuilder {
+    override fun params(params: Map<String, String?>?): DownloadBuilder {
         super.params(params)
         return this
     }
@@ -208,7 +208,7 @@ class DownloadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
         return this
     }
 
-    override fun headers(headers: Map<String?, String?>?): DownloadBuilder {
+    override fun headers(headers: Map<String, String?>?): DownloadBuilder {
         super.headers(headers)
         return this
     }

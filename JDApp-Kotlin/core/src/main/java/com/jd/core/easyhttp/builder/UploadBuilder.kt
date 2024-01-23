@@ -20,16 +20,16 @@ class UploadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
     private var files: Array<out Pair<String, File>?>? = null
     override fun createBuilder(): Request.Builder {
         val bodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
-        if (params != null && !params!!.isEmpty()) {
+        if (params != null && params!!.isNotEmpty()) {
             for (key in params!!.keys) {
-                bodyBuilder.addFormDataPart(key, params!![key])
+                params!![key]?.let { bodyBuilder.addFormDataPart(key, it) }
             }
         }
         addFiles(bodyBuilder)
         val requestBody: RequestBody = bodyBuilder.build()
         //这是正常的请求头
         val mBuilder = Request.Builder()
-        mBuilder.url(url)
+        url?.let { mBuilder.url(it) }
         //进项这部操作才能监听进度，来自鸿洋okHttpUtils
         val requestBodyProgress: RequestBody =
             CountingRequestBody(requestBody) { bytesWritten: Long, contentLength: Long ->
@@ -66,7 +66,7 @@ class UploadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
 
     fun addFiles(mBuilder: MultipartBody.Builder) {
         if (files != null) {
-            var fileBody: RequestBody? = null
+            var fileBody: RequestBody?
             for (i in files!!.indices) {
                 if (files!![i] != null) {
                     val filePair = files!![i]
@@ -74,13 +74,15 @@ class UploadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
                     val file = filePair.second
                     val fileName = file.name
                     fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileName)), file)
-                    mBuilder.addPart(
-                        Headers.of(
-                            "Content-Disposition",
-                            "form-data; name=\"$fileKeyName\"; filename=\"$fileName\""
-                        ),
-                        fileBody
-                    )
+                    if (fileBody != null) {
+                        mBuilder.addPart(
+                            Headers.of(
+                                "Content-Disposition",
+                                "form-data; name=\"$fileKeyName\"; filename=\"$fileName\""
+                            ),
+                            fileBody
+                        )
+                    }
                 }
             }
         }

@@ -31,6 +31,7 @@ abstract class HttpBuilder(
     /**
      * tag
      */
+    @JvmField
     protected var tag: String? = null
 
     /**

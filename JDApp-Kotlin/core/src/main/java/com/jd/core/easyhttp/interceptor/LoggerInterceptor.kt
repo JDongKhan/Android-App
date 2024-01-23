@@ -88,7 +88,7 @@ class LoggerInterceptor : Interceptor {
         }
         stringBuilder.append("\n响应Cookie:")
         stringBuilder.append(
-            EasyHttp.getInstance().okHttpClient.cookieJar().loadForRequest(HttpUrl.get(url))
+            EasyHttp.instance.okHttpClient.cookieJar().loadForRequest(HttpUrl.get(url))
                 .toString()
         )
         stringBuilder.append("\n响应内容:")
