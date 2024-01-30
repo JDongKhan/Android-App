@@ -27,12 +27,12 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding:FragmentHomeBinding
 
     private var shopImage = intArrayOf(
-            R.drawable.shop_0,
-            R.drawable.shop_1,
-            R.drawable.shop_2,
-            R.drawable.shop_3,
+            R.drawable.default_icon,
+            R.drawable.default_icon,
+            R.drawable.default_icon,
+            R.drawable.default_icon,
 //            R.drawable.shop_4,
-            R.drawable.shop_5
+            R.drawable.default_icon
     )
     private val items = ArrayList<Map<String, Any>>()
 

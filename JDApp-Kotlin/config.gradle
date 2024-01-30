@@ -44,6 +44,7 @@ ext {
             "runner"                         : 'androidx.test:runner:1.1.0-alpha4',
             "espresso_core"                  : 'androidx.test.espresso:espresso-core:3.1.0-alpha4',
 
+
             //system
 //            "appcompat_v7"                   : "androidx.appcompat:appcompat:1.0.0-beta01",
 //            "constraint_layout"              : 'com.android.support.constraint:constraint-layout:1.1.1',
@@ -133,6 +134,7 @@ ext {
             "kotlinx_coroutines_android" : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
             "lifecycle_viewmodel_ktx": "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
             "lifecycle_livedata_ktx" : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            "activity_ktx":"androidx.activity:activity-ktx:1.6.0"
     ]
 
     // compiler库 引用方式 kapt 基本上都需要引用, lib_common中可以不引入
