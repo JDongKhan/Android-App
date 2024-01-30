@@ -137,7 +137,7 @@ class OtherFragment : BaseFragment() {
     }
 
     private fun testNetwork2(){
-        viewModel.text.observe(this
+        viewModel.text.observe(viewLifecycleOwner
         ) { t ->
             LogUtils.d("network", "数据变化了$t")
         }

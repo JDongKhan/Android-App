@@ -37,7 +37,7 @@ ext {
     arouter_version = '1.5.1'
     coroutines_version = '1.4.3'
     lifecycle_version = '2.4.1'
-
+    
     dependencies = [
             //test
             "junit"                          : 'junit:junit:4.12',
