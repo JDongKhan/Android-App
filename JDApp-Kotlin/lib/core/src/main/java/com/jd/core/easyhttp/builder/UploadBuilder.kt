@@ -4,7 +4,9 @@ import android.os.Handler
 import android.util.Pair
 import com.jd.core.easyhttp.request.CountingRequestBody
 import okhttp3.Headers
+import okhttp3.Headers.Companion.headersOf
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -73,10 +75,10 @@ class UploadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
                     val fileKeyName = filePair!!.first
                     val file = filePair.second
                     val fileName = file.name
-                    fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileName)), file)
+                    fileBody = RequestBody.create(guessMimeType(fileName).toMediaTypeOrNull(), file)
                     if (fileBody != null) {
                         mBuilder.addPart(
-                            Headers.of(
+                            headersOf(
                                 "Content-Disposition",
                                 "form-data; name=\"$fileKeyName\"; filename=\"$fileName\""
                             ),

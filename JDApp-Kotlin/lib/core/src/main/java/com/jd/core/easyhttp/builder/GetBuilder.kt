@@ -14,7 +14,7 @@ class GetBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
         if (params != null) {
             mBuilder.url(appendParams(url!!, params))
         } else {
-            mBuilder.url(url)
+            url?.let { mBuilder.url(it) }
         }
         return mBuilder
     }

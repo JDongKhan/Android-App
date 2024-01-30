@@ -124,7 +124,9 @@ abstract class HttpBuilder(
             if (currentRetryCount < retryCount && retryCount > 0) {
                 // 如果超时并未超过指定次数，则重新连接
                 currentRetryCount++
-                okHttpClient.newCall(call.request()).enqueue(callback)
+                if (callback != null) {
+                    okHttpClient.newCall(call.request()).enqueue(callback)
+                }
                 return
             }
         }
@@ -157,7 +159,7 @@ abstract class HttpBuilder(
         }
         //网络请求成功
         if (response.isSuccessful) {
-            val result = response.body()!!.string()
+            val result = response.body!!.string()
             var successObject: Any? = null
             successObject = if (resultCall.type == null) {
                 result
@@ -174,7 +176,7 @@ abstract class HttpBuilder(
             }
         } else {
             //接口请求确实成功了，code 不是 200..299
-            val errorMsg = response.body()!!.string()
+            val errorMsg = response.body!!.string()
             mDelivery.post {
                 resultCall.onAfter()
                 resultCall.onError(errorMsg)
@@ -197,7 +199,7 @@ abstract class HttpBuilder(
         if (resultCall != null) {
             mDelivery.post { resultCall.onBefore() }
         }
-        okHttpClient.newCall(okHttpRequest).enqueue(object : Callback {
+        okHttpClient.newCall(okHttpRequest!!).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 doFailureCallback(call, e, resultCall, this)
             }
@@ -245,7 +247,7 @@ abstract class HttpBuilder(
             return null
         }
         for (key in headers.keys) {
-            headerBuilder.add(key, headers[key])
+            headers[key]?.let { headerBuilder.add(key, it) }
         }
         return headerBuilder.build()
     }

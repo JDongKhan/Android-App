@@ -4,6 +4,7 @@ import android.util.Log
 import com.jd.core.easyhttp.EasyHttp
 import com.jd.core.utils.AppUtils
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -21,11 +22,11 @@ class LoggerInterceptor : Interceptor {
         val log =
             "1".equals(originalRequest.header("Logger"), ignoreCase = true)
         if (log) {
-            Log.d("network", "请求地址:" + originalRequest.url())
+            Log.d("network", "请求地址:" + originalRequest.url)
         } else {
             val stringBuilder = StringBuilder()
             stringBuilder.append("客户端开始请求:")
-            stringBuilder.append(originalRequest.url())
+            stringBuilder.append(originalRequest.url)
             stringBuilder.append("\n开始请求时间戳:")
             stringBuilder.append(AppUtils.getDeviceId())
             stringBuilder.append("#")
@@ -49,7 +50,7 @@ class LoggerInterceptor : Interceptor {
         val requestString = bodyToString(request)
         stringBuilder.append("客户端开始请求(")
         stringBuilder.append(AppUtils.getDeviceId())
-        val url = request.url().toString()
+        val url = request.url.toString()
         stringBuilder.append("\n请求地址:")
         stringBuilder.append(url)
         stringBuilder.append("\n请求内容:")
@@ -69,26 +70,26 @@ class LoggerInterceptor : Interceptor {
         stringBuilder.append(AppUtils.getDeviceId())
         stringBuilder.append(")")
         stringBuilder.append("请求耗时：" + time + "ms")
-        val url = request.url().toString()
+        val url = request.url.toString()
         stringBuilder.append("\n请求地址:")
         stringBuilder.append(url)
         stringBuilder.append("\n请求内容:")
         stringBuilder.append(requestString)
         //响应报文
         stringBuilder.append("\nHTTP状态码:")
-        stringBuilder.append(response?.code())
-        if (response?.headers() != null) {
+        stringBuilder.append(response?.code)
+        if (response?.headers != null) {
             stringBuilder.append(
                 """
     
     响应头:
-    ${response.headers()}
+    ${response.headers}
     """.trimIndent()
             )
         }
         stringBuilder.append("\n响应Cookie:")
         stringBuilder.append(
-            EasyHttp.instance.okHttpClient.cookieJar().loadForRequest(HttpUrl.get(url))
+            EasyHttp.instance.okHttpClient.cookieJar.loadForRequest(url.toHttpUrl())
                 .toString()
         )
         stringBuilder.append("\n响应内容:")
@@ -104,12 +105,12 @@ class LoggerInterceptor : Interceptor {
      * @return
      */
     private fun bodyToString(request: Request): String {
-        return if ("POST" != request.method()) {
+        return if ("POST" != request.method) {
             ""
         } else try {
             val copy = request.newBuilder().build()
             val buffer = Buffer()
-            copy.body()!!.writeTo(buffer)
+            copy.body!!.writeTo(buffer)
             buffer.readUtf8()
         } catch (e: Exception) {
             "something error when show requestBody."

@@ -32,8 +32,8 @@ class NetCacheInterceptor : Interceptor {
         }
         request = builder1.build()
         val response = chain.proceed(request)
-        val list = response.headers().values("Token")
-        if (list.size > 0) {
+        val list = response.headers.values("Token")
+        if (list.isNotEmpty()) {
             SPUtils.getInstance().put("USER_TOKEN", list[0])
         }
         return if (onlineCacheTime != 0) {

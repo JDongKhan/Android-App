@@ -3,6 +3,7 @@ package com.jd.core.network.gson
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okio.Buffer
 import retrofit2.Converter
@@ -26,7 +27,7 @@ internal class BaseRequestBodyConverter<T>(
     }
 
     companion object {
-        private val MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8")
+        private val MEDIA_TYPE = "application/json; charset=UTF-8".toMediaTypeOrNull()
         private val UTF_8 = Charset.forName("UTF-8")
     }
 }

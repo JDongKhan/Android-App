@@ -56,7 +56,7 @@ class EasyHttp private constructor() {
      * tag取消网络请求
      */
     fun cancelOkhttpTag(tag: String) {
-        val dispatcher = okHttpClient.dispatcher()
+        val dispatcher = okHttpClient.dispatcher
         synchronized(dispatcher) {
 
             //请求列表里的，取消网络请求
@@ -90,19 +90,19 @@ class EasyHttp private constructor() {
             }
 
         fun get(): GetBuilder {
-            return GetBuilder(instance!!.okHttpClient, instance!!.delivery)
+            return GetBuilder(instance.okHttpClient, instance.delivery)
         }
 
         fun post(): PostBuilder {
-            return PostBuilder(instance!!.okHttpClient, instance!!.delivery)
+            return PostBuilder(instance.okHttpClient, instance.delivery)
         }
 
         fun upload(): UploadBuilder {
-            return UploadBuilder(instance!!.okHttpClient, instance!!.delivery)
+            return UploadBuilder(instance.okHttpClient, instance.delivery)
         }
 
         fun download(): DownloadBuilder {
-            return DownloadBuilder(instance!!.okHttpClient, instance!!.delivery)
+            return DownloadBuilder(instance.okHttpClient, instance.delivery)
         }
     }
 }

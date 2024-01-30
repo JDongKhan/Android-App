@@ -47,7 +47,7 @@ class DownloadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
     private var resume = false
     override fun createBuilder(): Request.Builder {
         val mBuilder = Request.Builder()
-        mBuilder.url(url)
+        mBuilder.url(url!!)
         //这里只要断点上传，总会走缓存。。所以强制网络下载
         mBuilder.cacheControl(CacheControl.FORCE_NETWORK)
         if (resume) {
@@ -107,12 +107,12 @@ class DownloadBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
         }
         val tempFile = File(dir, fileNameTemp)
         try {
-            `is` = response.body()!!.byteStream()
+            `is` = response.body!!.byteStream()
             //总长度
             val total: Long = if (resume) {
-                response.body()!!.contentLength() + currentLength
+                response.body!!.contentLength() + currentLength
             } else {
-                response.body()!!.contentLength()
+                response.body!!.contentLength()
             }
             mDelivery.post { listener?.inProgress(total, 0f) }
             fos = if (resume) {

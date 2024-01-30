@@ -25,10 +25,10 @@ class Network {
         val response = chain.proceed(request)
         val endTime = System.currentTimeMillis()
         val duration = endTime - startTime
-        val mediaType = response.body()!!.contentType()
-        val content = response.body()!!.string()
+        val mediaType = response.body!!.contentType()
+        val content = response.body!!.string()
         Log.e(TAG, "----------Request Start----------------")
-        Log.e(TAG, "| " + request.toString() + request.headers().toString())
+        Log.e(TAG, "| " + request.toString() + request.headers.toString())
         Log.e(TAG, "| Response:" + AppUtils.unicodeToUTF_8(content))
         Log.e(TAG, "----------Request End:" + duration + "毫秒----------")
         response.newBuilder()

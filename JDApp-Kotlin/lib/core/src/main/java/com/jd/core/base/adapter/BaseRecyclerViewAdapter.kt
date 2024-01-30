@@ -1,7 +1,6 @@
 package com.jd.core.base.adapter
 
 import android.content.Context
-import android.media.Image
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- *
+ * adapter
  */
 abstract class BaseRecyclerViewAdapter<T>(private val mContext: Context, private val mData: List<T>, private val viewHolders: List<Int>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

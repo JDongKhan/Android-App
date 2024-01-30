@@ -5,6 +5,7 @@ import com.jd.core.easyhttp.utils.GsonUtil
 import okhttp3.FormBody
 import okhttp3.Headers
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -14,10 +15,10 @@ import okhttp3.RequestBody
  */
 class PostBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
     HttpBuilder(okHttpClient, delivery) {
-    private var mediaType = MediaType.parse("application/json;charset=utf-8")
+    private var mediaType = "application/json;charset=utf-8".toMediaTypeOrNull()
     override fun createBuilder(): Request.Builder {
         val mBuilder = Request.Builder()
-        mBuilder.url(url)
+        url?.let { mBuilder.url(it) }
         var requestBody: RequestBody? = null
         requestBody = if (mediaType != null) {
             RequestBody.create(
@@ -42,11 +43,13 @@ class PostBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
     //拼接头部参数
     fun appendHeaders(headers: Map<String?, String?>?): Headers? {
         val headerBuilder = Headers.Builder()
-        if (headers == null || headers.isEmpty()) {
+        if (headers.isNullOrEmpty()) {
             return null
         }
         for (key in headers.keys) {
-            headerBuilder.add(key, headers[key])
+            if (key != null) {
+                headers[key]?.let { headerBuilder.add(key, it) }
+            }
         }
         return headerBuilder.build()
     }
@@ -56,13 +59,13 @@ class PostBuilder(okHttpClient: OkHttpClient, delivery: Handler) :
         requireNotNull(builder) { "builder can not be null ." }
         if (!params.isNullOrEmpty()) {
             for (key in params.keys) {
-                builder.add(key, params[key])
+                params[key]?.let { builder.add(key, it) }
             }
         }
     }
 
     fun json(): PostBuilder {
-        mediaType = MediaType.parse("application/json;charset=utf-8")
+        mediaType = "application/json;charset=utf-8".toMediaTypeOrNull()
         return this
     }
 

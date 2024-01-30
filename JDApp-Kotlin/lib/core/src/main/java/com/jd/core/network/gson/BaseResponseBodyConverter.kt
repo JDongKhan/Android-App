@@ -6,6 +6,7 @@ import com.jd.core.exception.NetworkException
 import okhttp3.ResponseBody
 import okio.BufferedSource
 import okio.Okio
+import okio.buffer
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Converter
@@ -26,7 +27,7 @@ class BaseResponseBodyConverter<T> internal constructor(gson: Gson, adapter: Typ
 
     @Throws(IOException::class)
     override fun convert(value: ResponseBody): T? {
-        val buffer: BufferedSource = Okio.buffer(value.source())
+        val buffer: BufferedSource = value.source().buffer
         val jsonString: String = buffer.readUtf8()
         return try {
             val `object` = JSONObject(jsonString)
