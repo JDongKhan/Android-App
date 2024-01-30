@@ -6,6 +6,7 @@ import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
+import com.jd.config.RoutePath
 import com.jd.core.base.BaseFragment
 import com.jd.core.base.adapter.BaseListViewAdapter
 import com.jd.core.network.Network.Companion.instance
@@ -69,7 +70,7 @@ class OtherFragment : BaseFragment() {
         item2["title"] = "路由"
         item2["action"] = object : OnOtherClick {
             override fun onClick() {
-                ARouter.getInstance().build("/test/activity1").navigation()
+                ARouter.getInstance().build(RoutePath.List.TEST).navigation(context)
             }
         }
         items.add(item2)

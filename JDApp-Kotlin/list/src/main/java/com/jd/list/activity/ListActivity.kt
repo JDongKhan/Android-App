@@ -6,11 +6,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.jd.config.RoutePath
 import com.jd.core.base.BaseActivity
 import com.jd.list.R
 import com.jd.list.databinding.ListBinding
 
-@Route(path = "/test/activity1")
+@Route(path = RoutePath.List.TEST)
 class ListActivity : BaseActivity() {
     private lateinit var binding:ListBinding
 

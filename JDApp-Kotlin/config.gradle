@@ -19,11 +19,7 @@ def getNetworkData(String url,String method) {
 }
 
 ext {
-    isModule = false
-    moduleShopMall = false
-    moduleShopCart = false
-    moduleWelfare = false
-    moduleCommonUi = false
+    isModule = true
 
     android = [
                compileSdkVersion       : 34,
@@ -56,9 +52,8 @@ ext {
             "multidex"                       : 'androidx.multidex:multidex:2.0.0',
 
             //路由
-            "arouter_api"                    : 'com.alibaba:arouter-api:1.2.4',
-            "arouter_compiler"               : 'com.alibaba:arouter-compiler:1.1.4',
-            "arouter_annotation"             : 'com.alibaba:arouter-annotation:1.0.4',
+            "arouter_api"                    : 'com.alibaba:arouter-api:1.5.2',
+            "arouter_compiler"               : 'com.alibaba:arouter-compiler:1.5.2',
 
             //网络
             //retrofit2包含okhttp

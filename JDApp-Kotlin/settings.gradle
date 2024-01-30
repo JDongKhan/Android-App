@@ -1,2 +1,3 @@
-include ':core', ':home', ':setting', ':list', ':other', ':app', ':debug'
+include ':home', ':setting', ':list', ':other', ':app', ':debug'
 include ':webview'
+include ':lib:config',  ':lib:core'

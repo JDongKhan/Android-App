@@ -29,7 +29,7 @@ allprojects {
         mavenLocal()
         google()
         jcenter()
-        
+        mavenCentral()
     }
 }
 
