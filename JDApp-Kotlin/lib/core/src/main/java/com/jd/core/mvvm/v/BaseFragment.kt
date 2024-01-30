@@ -66,13 +66,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     /**
-     * 获取子ViewModel
-     */
-    fun findViewModel(clazz:Class<out BaseViewModel>) : BaseViewModel {
-        return ViewModelProvider(this)[clazz]
-    }
-
-    /**
      * 返回view
      * @param view
      * @param savedInstanceState

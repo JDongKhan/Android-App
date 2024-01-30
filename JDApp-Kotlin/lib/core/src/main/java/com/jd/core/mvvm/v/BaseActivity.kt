@@ -57,13 +57,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
-    /**
-     * 获取子ViewModel
-     */
-    fun findViewModel(clazz:Class<out BaseViewModel>) : BaseViewModel {
-        return ViewModelProvider(this)[clazz]
-    }
-
 
     private fun initImmersionBar() {
         if (mImmersionBar == null) {

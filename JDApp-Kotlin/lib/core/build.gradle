@@ -51,6 +51,7 @@ dependencies {
 
     api rootProject.ext.dependencies.kotlinx_coroutines_android
     api rootProject.ext.dependencies.lifecycle_viewmodel_ktx
+    api rootProject.ext.dependencies.lifecycle_livedata_ktx
 
     //logger
     implementation ('com.orhanobut:logger:2.2.0')

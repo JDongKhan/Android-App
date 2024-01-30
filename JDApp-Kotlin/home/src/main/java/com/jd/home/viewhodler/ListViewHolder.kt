@@ -11,7 +11,7 @@ class ListViewHolder : BaseListViewAdapter.BaseViewHolder {
     lateinit internal var imageView: ImageView
     lateinit internal var textView1: TextView
 
-    override fun layout_id(): Int {
+    override fun layoutId(): Int {
         return R.layout.home_fragment_list_item
     }
 

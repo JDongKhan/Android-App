@@ -1,22 +1,20 @@
 package com.jd.core.mvvm.m
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import com.jd.core.network.model.Response
 
 open class BaseRepository {
 
-    /**
-     * 发起请求封装
-     * 该方法将flow的执行切换至IO线程
-     * @param requestBlock 请求的整体逻辑
-     * @return Flow<T>
-     */
-    protected fun <T> request(requestBlock: suspend FlowCollector<T>.() -> Unit): Flow<T> {
-        return flow(block = requestBlock).flowOn(Dispatchers.IO)
+    suspend fun <T> apiCall(call: suspend () -> Response<T>): Response<T> {
+        return call.invoke()
     }
 
+    suspend fun <T> safeApiCall(call: suspend () -> Response<T>): Response<T> {
+        return try {
+            call()
+        } catch (e: Exception) {
+            // An exception was thrown when calling the API so we're converting this to an IOException
+            Response(-1,null,"请求异常")
+        }
+    }
 
 }

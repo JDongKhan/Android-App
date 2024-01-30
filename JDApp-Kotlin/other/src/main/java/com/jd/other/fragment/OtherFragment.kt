@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jd.config.RoutePath
 import com.jd.core.mvvm.v.BaseFragment
@@ -14,9 +16,9 @@ import com.jd.core.network.Network.Companion.instance
 import com.jd.other.R
 import com.jd.other.network.BookService
 import com.jd.other.viewholder.OtherViewHolder
+import com.jd.other.vm.OtherViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -26,10 +28,12 @@ import kotlinx.coroutines.launch
  * A simple [Fragment] subclass.
  */
 class OtherFragment : BaseFragment() {
-    var listView: ListView? = null
+    private var listView: ListView? = null
     private val items: MutableList<Map<String, Any>> = ArrayList()
+    private lateinit var viewModel: OtherViewModel
 
     override fun initView(view: View) {
+        viewModel = ViewModelProvider(this)[OtherViewModel::class.java]
         listView = view.findViewById(R.id.simpleListView)
         navigationBar.setBackViewHidden(true)
         navigationBar.setTitle("功能")
@@ -105,6 +109,10 @@ class OtherFragment : BaseFragment() {
         items.add(item4)
     }
 
+
+    /**
+     * 第一种用法
+     */
     private fun testNetwork() {
         val result =  instance.createService(BookService::class.java).getShop("63.223.108.42")
         result?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
@@ -115,14 +123,25 @@ class OtherFragment : BaseFragment() {
         }
     }
 
-    private fun testNetwork2(){
-        CoroutineScope(Dispatchers.Main).launch {
+    /**
+     * 第二种用法
+     */
+    fun getShop() {
+        lifecycleScope.launch {
             val responseAsync = async ( SupervisorJob() + Dispatchers.IO) {
                 return@async instance.createService(BookService::class.java).getShop2("63.223.108.42")
             }
             val result = responseAsync.await()
             LogUtils.d("network",result.data)
         }
+    }
+
+    private fun testNetwork2(){
+        viewModel.text.observe(this
+        ) { t ->
+            LogUtils.d("network", "数据变化了$t")
+        }
+        viewModel.request()
     }
 
     ///////////////////////////////////////
