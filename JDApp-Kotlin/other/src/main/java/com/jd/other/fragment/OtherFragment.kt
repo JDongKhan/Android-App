@@ -23,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 /**
  * A simple [Fragment] subclass.
@@ -30,10 +31,10 @@ import kotlinx.coroutines.launch
 class OtherFragment : BaseFragment() {
     private var listView: ListView? = null
     private val items: MutableList<Map<String, Any>> = ArrayList()
-    private lateinit var viewModel: OtherViewModel
+
+    private val viewModel: OtherViewModel by inject()
 
     override fun initView(view: View) {
-        viewModel = ViewModelProvider(this)[OtherViewModel::class.java]
         listView = view.findViewById(R.id.simpleListView)
         navigationBar.setBackViewHidden(true)
         navigationBar.setTitle("功能")

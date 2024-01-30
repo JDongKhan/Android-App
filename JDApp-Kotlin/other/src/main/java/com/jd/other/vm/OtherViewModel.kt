@@ -13,7 +13,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class OtherViewModel : BaseViewModel<OtherRepository>() {
+class OtherViewModel(private val repo: OtherRepository) : BaseViewModel<OtherRepository>() {
+
     val text by lazy { MutableLiveData<String>("") }
 
     val user: LiveData<String> = liveData {
@@ -29,11 +30,11 @@ class OtherViewModel : BaseViewModel<OtherRepository>() {
     fun request() {
       val r =  viewModelScope.launch {
             val responseAsync = async ( SupervisorJob() + Dispatchers.IO) {
-                return@async repository?.getShop();
+                return@async repo.getShop();
             }
             val result = responseAsync.await()
             LogUtils.d("network",result?.data)
-            text.value = result?.data
+            text.value = result.data
         }
 
         LogUtils.d("network",r.toString())

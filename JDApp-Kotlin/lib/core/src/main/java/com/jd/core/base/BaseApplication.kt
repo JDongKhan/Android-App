@@ -12,6 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import kotlin.system.exitProcess
 
 
@@ -40,16 +43,25 @@ open class BaseApplication : Application() {
             ARouter.openDebug()
         }
         ARouter.init(this)
-
+        //集成koin
+        initKoin()
+        //生命周期传递
         mLoadModuleProxy.onCreate(this)
+        //异步初始化
+        initAsync()
+    }
 
-        initDepends()
+    private fun initKoin(){
+        startKoin {
+            androidLogger()
+            androidContext(this@BaseApplication)
+        }
     }
 
     /**
      * 初始化第三方依赖
      */
-    private fun initDepends() {
+    private fun initAsync() {
         // 开启一个 Default Coroutine 进行初始化不会立即使用的第三方
         mCoroutineScope.launch(Dispatchers.Default) {
             mLoadModuleProxy.onAsyncInit()

@@ -1,8 +1,10 @@
 package com.jd.other.model
 
+import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 
+@SuppressLint("ParcelCreator")
 class Book : Parcelable {
 
     var name: String? = null
@@ -39,16 +41,13 @@ class Book : Parcelable {
         return "name : $name , price : $price"
     }
 
-    companion object {
+    companion object CREATOR : Parcelable.Creator<Book> {
+        override fun createFromParcel(parcel: Parcel): Book {
+            return Book(parcel)
+        }
 
-        val MCREATOR: Parcelable.Creator<Book> = object : Parcelable.Creator<Book> {
-            override fun createFromParcel(`in`: Parcel): Book {
-                return Book(`in`)
-            }
-
-            override fun newArray(size: Int): Array<Book?> {
-                return arrayOfNulls(size)
-            }
+        override fun newArray(size: Int): Array<Book?> {
+            return arrayOfNulls(size)
         }
     }
 }
