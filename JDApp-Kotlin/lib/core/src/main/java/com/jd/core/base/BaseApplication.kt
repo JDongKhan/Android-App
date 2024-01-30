@@ -6,15 +6,27 @@ import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 
 import androidx.multidex.MultiDex
+import com.jd.core.base.lifecycle.LoadModuleProxy
+import com.jd.core.log.LogUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlin.system.exitProcess
+import kotlin.system.measureTimeMillis
 
 
 open class BaseApplication : Application() {
+
+    private val mCoroutineScope by lazy(mode = LazyThreadSafetyMode.NONE) { MainScope() }
+    private val mLoadModuleProxy by lazy(mode = LazyThreadSafetyMode.NONE) { LoadModuleProxy() }
 
     private val isDebugARouter = true
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         appContext = this
+        mLoadModuleProxy.onAttachBaseContext(base)
     }
 
     override fun onCreate() {
@@ -28,8 +40,27 @@ open class BaseApplication : Application() {
             ARouter.openDebug()
         }
         ARouter.init(this)
+
+        mLoadModuleProxy.onCreate(this)
+
+        initDepends()
     }
 
+    /**
+     * 初始化第三方依赖
+     */
+    private fun initDepends() {
+        // 开启一个 Default Coroutine 进行初始化不会立即使用的第三方
+        mCoroutineScope.launch(Dispatchers.Default) {
+            mLoadModuleProxy.onAsyncInit()
+        }
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        mLoadModuleProxy.onTerminate(this)
+        mCoroutineScope.cancel()
+    }
 
     /**
      * 退出应用
@@ -38,7 +69,7 @@ open class BaseApplication : Application() {
         //用于杀掉当前进程
         android.os.Process.killProcess(android.os.Process.myPid())
         //参数0和1代表退出的状态，0表示正常退出，1表示异常退出
-        System.exit(0)
+        exitProcess(0)
     }
 
     companion object {

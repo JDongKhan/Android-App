@@ -1,18 +1,27 @@
 package com.jd.debug.application
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
+import com.google.auto.service.AutoService
+import com.jd.core.base.IApplication
 
-import com.renny.libcore.AppInit
-import com.renny.mylibrary.IAppInit
+@AutoService(IApplication::class)
+class DebugApplication : IApplication {
+    override fun onAttachBaseContext(context: Context) {
 
-/*
-    @see https://github.com/ren93/initiator
- */
+    }
 
-@AppInit(priority = 22, delay = 1740, onlyInDebug = true)
-class DebugApplication : IAppInit {
-    override fun init(application: Application) {
+    override fun onCreate(application: Application) {
         Log.d("init==", "DebugApplication")
     }
+
+    override fun onTerminate(application: Application) {
+
+    }
+
+    override fun onAsyncInit() {
+
+    }
+
 }

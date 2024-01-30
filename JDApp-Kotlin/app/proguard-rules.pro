@@ -40,12 +40,6 @@
 -dontnote com.google.android.material.**
 -dontwarn androidx.**
 
-#--------------------initiator--------------------
--keep class com.renny.mylibrary.*
--keepclassmembers class com.renny.mylibrary.**{
-    *;
-}
-
 #--------------------arouter--------------------
 -keep public class com.alibaba.android.arouter.routes.**{*;}
 -keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
