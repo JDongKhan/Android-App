@@ -4,8 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jd.core.base.BaseActivity
-import com.jd.home.R
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.home.databinding.HomeDetailActivityBinding
 
 class HomeDetailActivity : BaseActivity() {

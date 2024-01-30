@@ -22,7 +22,7 @@ package com.jd.list.activity
 import android.content.Intent
 import android.view.View
 
-import com.jd.core.base.BaseActivity
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.list.databinding.ListActivityMainBinding
 import com.jd.list.utils.BaseUtils
 

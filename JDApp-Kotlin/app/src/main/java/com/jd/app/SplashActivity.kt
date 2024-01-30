@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.jd.app.databinding.ActivitySplashBinding
 
-import com.jd.core.base.BaseActivity
+import com.jd.core.mvvm.v.BaseActivity
 
 
 class SplashActivity : BaseActivity(), Animator.AnimatorListener {

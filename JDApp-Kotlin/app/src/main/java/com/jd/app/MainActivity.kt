@@ -13,7 +13,7 @@ import android.widget.TextView
 
 import com.google.android.material.tabs.TabLayout
 import com.jd.app.databinding.ActivityMainBinding
-import com.jd.core.base.BaseActivity
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.home.fragment.HomeFragment
 import com.jd.list.fragment.ListFragment
 import com.jd.other.fragment.OtherFragment

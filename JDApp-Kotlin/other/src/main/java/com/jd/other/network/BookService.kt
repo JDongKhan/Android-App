@@ -8,4 +8,7 @@ import retrofit2.http.Query
 interface BookService {
     @GET("/service/getIpInfo.php")
     fun getShop(@Query("ip") ip: String?): Observable<Response<String?>>?
+
+    @GET("/service/getIpInfo.php")
+    suspend fun getShop2(@Query("ip") ip: String?): Response<String?>
 }

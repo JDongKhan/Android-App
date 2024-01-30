@@ -49,6 +49,9 @@ dependencies {
     api rootProject.ext.dependencies.rxjava2
     api rootProject.ext.dependencies.adapter_rxjava2
 
+    api rootProject.ext.dependencies.kotlinx_coroutines_android
+    api rootProject.ext.dependencies.lifecycle_viewmodel_ktx
+
     //logger
     implementation ('com.orhanobut:logger:2.2.0')
     implementation 'com.google.android.material:material:1.4.0'

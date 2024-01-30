@@ -7,14 +7,20 @@ import android.widget.ListView
 import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jd.config.RoutePath
-import com.jd.core.base.BaseFragment
+import com.jd.core.mvvm.v.BaseFragment
 import com.jd.core.base.adapter.BaseListViewAdapter
+import com.jd.core.log.LogUtils
 import com.jd.core.network.Network.Companion.instance
 import com.jd.other.R
 import com.jd.other.network.BookService
 import com.jd.other.viewholder.OtherViewHolder
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -66,6 +72,17 @@ class OtherFragment : BaseFragment() {
             }
         }
         items.add(item1)
+
+        val item11: MutableMap<String, Any> = HashMap()
+        item11["title"] = "网络2"
+        item11["action"] = object : OnOtherClick {
+            override fun onClick() {
+                testNetwork2()
+            }
+        }
+        items.add(item11)
+
+
         val item2: MutableMap<String, Any> = HashMap()
         item2["title"] = "路由"
         item2["action"] = object : OnOtherClick {
@@ -95,6 +112,16 @@ class OtherFragment : BaseFragment() {
             Toast.makeText(this@OtherFragment.context, it.data, Toast.LENGTH_LONG).show()
         }) {
             Toast.makeText(this@OtherFragment.context, it.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun testNetwork2(){
+        CoroutineScope(Dispatchers.Main).launch {
+            val responseAsync = async ( SupervisorJob() + Dispatchers.IO) {
+                return@async instance.createService(BookService::class.java).getShop2("63.223.108.42")
+            }
+            val result = responseAsync.await()
+            LogUtils.d("network",result.data)
         }
     }
 

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.jd.core.base.BaseFragment;
+import com.jd.core.mvvm.v.BaseFragment;
 import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.list.R;
 import com.jd.list.activity.DemoActivity;

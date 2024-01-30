@@ -35,6 +35,8 @@ ext {
 
     glide_version = '4.10.0'
     arouter_version = '1.5.1'
+    coroutines_version = '1.4.3'
+    lifecycle_version = '2.4.1'
 
     dependencies = [
             //test
@@ -127,7 +129,9 @@ ext {
             //沉浸式状态栏
             "barlibrary"                : "com.gyf.barlibrary:barlibrary:2.3.0",
 
-
+            // androidx
+            "kotlinx_coroutines_android" : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
+            "lifecycle_viewmodel_ktx": "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
     ]
 
     // compiler库 引用方式 kapt 基本上都需要引用, lib_common中可以不引入

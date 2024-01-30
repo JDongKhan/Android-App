@@ -77,13 +77,13 @@ abstract class BaseRecyclerViewAdapter<T>(private val mContext: Context, private
         }
 
         fun setText(viewId: Int,text: String): CommonViewHolder {
-           var tv: TextView = getView(viewId) as TextView
+           val tv: TextView = getView(viewId) as TextView
             tv.text = text
             return this
         }
 
         fun setImageResource(viewId: Int,resId: Int): CommonViewHolder {
-            var imageView:ImageView = getView(viewId) as ImageView
+            val imageView:ImageView = getView(viewId) as ImageView
             imageView.setImageResource(resId)
             return this
         }

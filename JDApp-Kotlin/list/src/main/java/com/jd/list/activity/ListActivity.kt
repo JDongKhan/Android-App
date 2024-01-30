@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jd.config.RoutePath
-import com.jd.core.base.BaseActivity
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.list.R
 import com.jd.list.databinding.ListBinding
 

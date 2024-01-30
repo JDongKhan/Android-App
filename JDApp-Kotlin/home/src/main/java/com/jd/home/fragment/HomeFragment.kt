@@ -8,7 +8,7 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.*
 
-import com.jd.core.base.BaseFragment
+import com.jd.core.mvvm.v.BaseFragment
 import com.jd.core.base.adapter.BaseRecyclerViewAdapter
 import com.jd.home.R
 import com.jd.home.activity.HomeDetailActivity

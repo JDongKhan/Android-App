@@ -19,11 +19,10 @@
 
 package com.jd.list.activity
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 
-import com.jd.core.base.BaseActivity
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.list.R
 import com.jd.list.adapters.CardAdapter
 import com.jd.list.utils.BaseUtils

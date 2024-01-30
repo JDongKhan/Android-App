@@ -10,11 +10,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 
 abstract class BaseListViewAdapter(var context: Context, private val dataList: List<*>?, vararg viewHolders: Class<out BaseViewHolder>) : BaseAdapter() {
-    private val layoutInflater: LayoutInflater
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
     private var viewHolders: Array<out Class<out BaseViewHolder>>? = null
 
     init {
-        this.layoutInflater = LayoutInflater.from(context)
         this.viewHolders = viewHolders
     }
 
@@ -59,7 +58,7 @@ abstract class BaseListViewAdapter(var context: Context, private val dataList: L
                 e.message?.let { Log.e("BaseListViewAdapter", it) }
             }
 
-            val layout_id = viewHold!!.layout_id()
+            val layout_id = viewHold!!.layoutId()
             mConvertView = layoutInflater.inflate(layout_id, null)
             if (mConvertView == null) {
                 Log.e("BaseListViewAdapter", "请在[" + BaseViewHolder::class.java + "]类里面实现layout_id")
@@ -83,7 +82,7 @@ abstract class BaseListViewAdapter(var context: Context, private val dataList: L
     /** */
     interface BaseViewHolder {
 
-        fun layout_id(): Int
+        fun layoutId(): Int
 
         fun onCreateView(view: View?)
 
