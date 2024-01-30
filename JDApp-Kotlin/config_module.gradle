@@ -79,8 +79,11 @@ dependencies {
 
     // arouter 依赖
     api rootProject.ext.dependencies.arouter_api
-    //集成模式下需要编译器生成路由通信的代码
-    annotationProcessor rootProject.ext.dependencies.arouter_compiler
+
+
+    rootProject.ext.compiler.each {
+        kapt(it)
+    }
 
 
 }
