@@ -6,14 +6,13 @@ import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 
 import androidx.multidex.MultiDex
+import com.jd.core.base.lifecycle.BaseActivityLifecycleCallbacks
 import com.jd.core.base.lifecycle.LoadModuleProxy
-import com.jd.core.log.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
-import kotlin.system.measureTimeMillis
 
 
 open class BaseApplication : Application() {
@@ -33,7 +32,8 @@ open class BaseApplication : Application() {
         super.onCreate()
         //MultiDex分包方法 必须最先初始化
         MultiDex.install(this)
-
+        // 全局监听 Activity 生命周期
+        registerActivityLifecycleCallbacks(BaseActivityLifecycleCallbacks())
 
         if (isDebugARouter) {
             ARouter.openLog()
