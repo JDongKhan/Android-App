@@ -75,8 +75,9 @@ ext {
             "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
             "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$kotlin_version",
 
-            //androidx
+            //协程
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
+            //androidx
             "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
             "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
             "androidx.activity:activity-ktx:1.6.0",

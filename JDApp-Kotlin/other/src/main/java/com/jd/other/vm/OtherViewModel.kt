@@ -33,7 +33,7 @@ class OtherViewModel(private val repo: OtherRepository) : BaseViewModel<OtherRep
                 return@async repo.getShop();
             }
             val result = responseAsync.await()
-            LogUtils.d("network",result?.data)
+            LogUtils.d("network",result.data)
             text.value = result.data
         }
 

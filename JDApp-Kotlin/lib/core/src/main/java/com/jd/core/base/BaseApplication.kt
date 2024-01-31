@@ -6,6 +6,7 @@ import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 
 import androidx.multidex.MultiDex
+import com.jd.core.BuildConfig
 import com.jd.core.base.lifecycle.BaseActivityLifecycleCallbacks
 import com.jd.core.base.lifecycle.LoadModuleProxy
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,6 @@ open class BaseApplication : Application() {
     private val mCoroutineScope by lazy(mode = LazyThreadSafetyMode.NONE) { MainScope() }
     private val mLoadModuleProxy by lazy(mode = LazyThreadSafetyMode.NONE) { LoadModuleProxy() }
 
-    private val isDebugARouter = true
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -37,8 +37,8 @@ open class BaseApplication : Application() {
         MultiDex.install(this)
         // 全局监听 Activity 生命周期
         registerActivityLifecycleCallbacks(BaseActivityLifecycleCallbacks())
-
-        if (isDebugARouter) {
+        //ARouter
+        if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
         }
