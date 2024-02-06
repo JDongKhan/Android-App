@@ -34,9 +34,8 @@ class OtherViewModel(private val repo: OtherRepository) : BaseViewModel<OtherRep
             }
             val result = responseAsync.await()
             LogUtils.d("network",result.data)
-            text.value = result.data
+            text.value = result.data.apply {  }
         }
-
         LogUtils.d("network",r.toString())
     }
 }
