@@ -1,5 +1,6 @@
 package com.jd.app
 
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -11,12 +12,12 @@ import android.widget.TextView
 
 
 import com.google.android.material.tabs.TabLayout
-import com.jd.core.base.BaseActivity
+import com.jd.app.databinding.ActivityMainBinding
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.home.fragment.HomeFragment
 import com.jd.list.fragment.ListFragment
 import com.jd.other.fragment.OtherFragment
 import com.jd.setting.fragment.SettingFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 import java.util.ArrayList
 import java.util.HashMap
@@ -25,24 +26,25 @@ import java.util.HashMap
 class MainActivity : BaseActivity(), ViewPager.OnPageChangeListener {
 
     internal var items: MutableList<Map<String, Any>> = ArrayList()
+    private lateinit var binding:ActivityMainBinding
 
-    override fun layoutId(): Int {
-        return R.layout.activity_main
+    override fun layoutView(): View {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun initView() {
-
         //初始化数据
         this.initData()
         //viewpager
-        viewpager!!.addOnPageChangeListener(this)
-        viewpager!!.adapter = ViewPagerAdapter(supportFragmentManager)
+        binding.viewpager.addOnPageChangeListener(this)
+        binding.viewpager.adapter = ViewPagerAdapter(supportFragmentManager)
 
-        tab_layout!!.setupWithViewPager(viewpager)
+        binding.tabLayout.setupWithViewPager(binding.viewpager)
 
         setTabLayout()
 
-        tab_layout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 selectTab(tab)
             }
@@ -61,7 +63,7 @@ class MainActivity : BaseActivity(), ViewPager.OnPageChangeListener {
     private fun setTabLayout() {
         for (i in items.indices) {
             val item = items[i]
-            val tab = tab_layout!!.getTabAt(i)
+            val tab =  binding.tabLayout.getTabAt(i)
             tab!!.setCustomView(R.layout.view_main_tab)
             val tabView = tab.customView
 
@@ -88,7 +90,7 @@ class MainActivity : BaseActivity(), ViewPager.OnPageChangeListener {
     private fun selectTab(tab: TabLayout.Tab) {
         for (i in items.indices) {
             val item = items[i]
-            val tmpTab = tab_layout!!.getTabAt(i)
+            val tmpTab = binding.tabLayout.getTabAt(i)
 
 
             val iconView = tmpTab!!.customView!!.findViewById<ImageView>(R.id.tab_icon_iv)

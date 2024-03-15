@@ -3,6 +3,7 @@ package com.jd.app.plugin
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.ActionMode
 import android.view.KeyEvent
@@ -11,10 +12,10 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.SearchEvent
 import android.view.View
-import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -176,7 +177,7 @@ object DataAnalysis {
             return originalCallback.onCreatePanelMenu(featureId, menu)
         }
 
-        override fun onPreparePanel(featureId: Int, view: View, menu: Menu): Boolean {
+        override fun onPreparePanel(featureId: Int, view: View?, menu: Menu): Boolean {
             return originalCallback.onPreparePanel(featureId, view, menu)
         }
 
@@ -216,6 +217,7 @@ object DataAnalysis {
             return originalCallback.onSearchRequested()
         }
 
+        @RequiresApi(Build.VERSION_CODES.M)
         override fun onSearchRequested(searchEvent: SearchEvent): Boolean {
             return originalCallback.onSearchRequested(searchEvent)
         }
@@ -224,6 +226,7 @@ object DataAnalysis {
             return originalCallback.onWindowStartingActionMode(callback)
         }
 
+        @RequiresApi(Build.VERSION_CODES.M)
         override fun onWindowStartingActionMode(callback: ActionMode.Callback, type: Int): ActionMode? {
             return originalCallback.onWindowStartingActionMode(callback, type)
         }

@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import butterknife.BindView;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -27,11 +26,9 @@ import java.util.Map;
 
 public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
-    @BindView(R2.id.viewpager)
     ViewPager viewPager;
 
 
-    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
     List<Map<String,Object>> items = new ArrayList<>();
@@ -44,7 +41,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     protected void initView() {
-
+        viewPager = findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tab_layout);
         //初始化数据
         this.initData();
         //viewpager

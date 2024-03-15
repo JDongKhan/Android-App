@@ -16,7 +16,7 @@ public class ListViewHolder implements BaseListViewAdapter.BaseViewHolder {
     TextView textView2;
 
     @Override
-    public int layout_id() {
+    public int layoutId() {
         return R.layout.list_item;
     }
 

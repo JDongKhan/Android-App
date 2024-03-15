@@ -70,60 +70,56 @@ public class AppUtils {
      * 对比本地与线上的版本号
      * */
     public static boolean needUpdateV2(String local, String online) {
-
-
         boolean need = false;
-
         if (local != null && online != null) {
-
             String[] onlines = online.split("\\.");
             AppLog.e(Arrays.toString(onlines));
             String[] locals = local.split("\\.");
             AppLog.e(Arrays.toString(locals));
-
-            // 2.0.0-1.0.0
-            // 2.1.0-2.0.0
-            // 2.1.1-2.1.0
-
-
-            //3.0.0-4.0.0
-            //3.1.0-3.2.0
-            //3.1.1-3.2.0
-
             if (Integer.parseInt(onlines[0]) > Integer.parseInt(locals[0])) {
                 need = true;
-//                Logger.e("1-1");
-
             } else if (Integer.parseInt(onlines[0]) == Integer.parseInt(locals[0])) {
-//                Logger.e("1-2");
                 if (Integer.parseInt(onlines[1]) > Integer.parseInt(locals[1])) {
                     need = true;
-//                    Logger.e("1-2-1");
-
                 } else if (Integer.parseInt(onlines[1]) == Integer.parseInt(locals[1])) {
-//                    Logger.e("1-2-2");
                     if (Integer.parseInt(onlines[2]) > Integer.parseInt(locals[2])) {
-//                        Logger.e("1-2-2-1");
                         need = true;
                     } else {
-//                        Logger.e("1-2-2-2");
                         need = false;
                     }
 
                 } else if (Integer.parseInt(onlines[1]) < Integer.parseInt(locals[1])) {
                     need = false;
-//                    Logger.e("1-2-3");
                 }
-
-
             } else if (Integer.parseInt(onlines[0]) < Integer.parseInt(locals[0])) {
                 need = false;
-//                Logger.e("1-3");
             }
-
         }
         return need;
+    }
 
+
+    public static String unicodeToUTF_8(String src) {
+        if (null == src) {
+            return null;
+        }
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < src.length(); ) {
+            char c = src.charAt(i);
+            if (i + 6 < src.length() && c == '\\' && src.charAt(i + 1) == 'u') {
+                String hex = src.substring(i + 2, i + 6);
+                try {
+                    out.append((char) Integer.parseInt(hex, 16));
+                } catch (NumberFormatException nfe) {
+                    nfe.fillInStackTrace();
+                }
+                i = i + 6;
+            } else {
+                out.append(src.charAt(i));
+                ++i;
+            }
+        }
+        return out.toString();
 
     }
 

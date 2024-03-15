@@ -6,11 +6,12 @@ import android.widget.ImageView;
 
 import com.jd.core.base.BaseActivity;
 
-import butterknife.BindView;
 
+/**
+ * @author sn
+ */
 public class SplashActivity extends BaseActivity implements Animator.AnimatorListener {
 
-    @BindView(R.id.image_splash)
     ImageView ivSplash;
 
     @Override
@@ -20,6 +21,7 @@ public class SplashActivity extends BaseActivity implements Animator.AnimatorLis
 
     @Override
     protected void initView() {
+        ivSplash = findViewById(R.id.image_splash);
         // 渐变动画
         ivSplash.setAlpha(0.3f);
         ivSplash.animate()

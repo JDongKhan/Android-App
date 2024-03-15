@@ -1,5 +1,6 @@
 package com.jd.list.fragment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,11 +8,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.jd.core.base.BaseFragment;
+import com.jd.core.mvvm.v.BaseFragment;
 import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.list.R;
 import com.jd.list.activity.DemoActivity;
 import com.jd.list.activity.ListActivity;
+import com.jd.list.databinding.FragmentListBinding;
 import com.jd.list.utils.BaseUtils;
 import com.jd.list.viewholders.ListViewHolder;
 
@@ -24,15 +26,19 @@ import java.util.Map;
 public class ListFragment extends BaseFragment {
 
 
+    private FragmentListBinding binding;
+
     private List<Map<String,Object>> items = new ArrayList<>();
 
     public ListFragment() {
         // Required empty public constructor
     }
 
+    @NonNull
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_list;
+    protected View layoutView() {
+        binding = FragmentListBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override

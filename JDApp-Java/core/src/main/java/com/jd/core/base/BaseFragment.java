@@ -13,17 +13,13 @@ import android.widget.RelativeLayout;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.jd.core.R;
-import com.jd.core.R2;
 import com.jd.core.utils.AppLog;
 import com.jd.core.view.NavigationBar;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
     protected Context mContext;
-    private Unbinder unBinder;
+
     public ImmersionBar mImmersionBar;
 
     //导航
@@ -62,8 +58,6 @@ public abstract class BaseFragment extends Fragment {
             rl.addView(contentView);
             this.contentView = contentView;
         }
-
-        unBinder = ButterKnife.bind(this , view);
         //沉浸式状态栏
         initImmersionBar();
         return view ;
@@ -90,9 +84,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (unBinder != null) {
-            unBinder.unbind();
-        }
         if (mImmersionBar != null){
             mImmersionBar.destroy();
         }

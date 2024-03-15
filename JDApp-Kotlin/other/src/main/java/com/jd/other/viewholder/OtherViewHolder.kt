@@ -12,7 +12,7 @@ class OtherViewHolder : BaseListViewAdapter.BaseViewHolder {
     lateinit internal var textView1: TextView
     lateinit internal var textView2: TextView
 
-    override fun layout_id(): Int {
+    override fun layoutId(): Int {
         return R.layout.list_item
     }
 

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
 
 apply plugin: 'initiator'
 
@@ -7,23 +6,43 @@ apply plugin: 'initiator'
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
     defaultConfig {
-        applicationId "com.jd.app"
+        applicationId rootProject.android.applicationId
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
         // 设置MultiDex可用
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "arm64-v8a" //, "x86_64", "x86" "armeabi",
+        }
     }
+    signingConfigs {
+        apk {
+            keyAlias 'apk'
+            keyPassword 'apk'
+            storeFile file('../apk.keystore')
+            storePassword 'apk'
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
+        debug {
+//            signingConfig signingConfigs.apk
+        }
         release {
+//            signingConfig signingConfigs.apk
             minifyEnabled true
+            shrinkResources true
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -49,8 +68,6 @@ dependencies {
     testImplementation rootProject.ext.dependencies.junit
     androidTestImplementation rootProject.ext.dependencies.runner
     androidTestImplementation rootProject.ext.dependencies.espresso_core
-    //黄油刀 不加这个所有属性都没有值哦
-    annotationProcessor rootProject.ext.dependencies.butterknife_compiler
     implementation project(':home')
     implementation project(':list')
     implementation project(':other')

@@ -3,7 +3,12 @@ package com.jd.other.fragment;
 
 
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
+
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,13 +18,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jd.core.base.BaseFragment;
 import com.jd.core.base.adapter.BaseListViewAdapter;
 import com.jd.core.network.ServiceGenerator;
 import com.jd.other.R;
-import com.jd.other.R2;
 import com.jd.other.network.BookService;
 import com.jd.other.viewholder.OtherViewHolder;
 
@@ -35,7 +40,6 @@ import java.util.Map;
  */
 public class OtherFragment extends BaseFragment {
 
-    @BindView(R2.id.simpleListView)
     ListView listView;
 
     private List<Map<String,Object>> items = new ArrayList<>();
@@ -51,6 +55,7 @@ public class OtherFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
+        listView = view.findViewById(R.id.simpleListView);
         this.navigationBar.setBackViewHidden(true);
         this.navigationBar.setTitle("功能");
 
@@ -61,7 +66,8 @@ public class OtherFragment extends BaseFragment {
                 return 0;
             }
         };
-        listView.setAdapter(lazyAdapter); //导入
+        //导入
+        listView.setAdapter(lazyAdapter);
 
         //点击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -126,25 +132,30 @@ public class OtherFragment extends BaseFragment {
 
 
     private void testNetwork() {
-        Call<ResponseBody> call = ServiceGenerator.createService(BookService.class).getShop("63.223.108.42");
-        call.enqueue(new Callback<ResponseBody>() {
+        ServiceGenerator.getInstance().createService(BookService.class).getShop("63.223.108.42")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ResponseBody  body = response.body();
-                    if (body != null) {
-                        String s = body.string();
-                        Log.e("network", s);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            public void onSubscribe(Disposable d) {
+                Log.i("1111","onSubscribe");
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("network",t.toString());
+            public void onNext(String s) {
+                Log.i("1111","onNext:"+s);
+                Toast.makeText(OtherFragment.this.getContext(),s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.i("1111","onError"+e.getMessage());
+                Toast.makeText(OtherFragment.this.getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.i("1111","onComplete");
             }
         });
     }

@@ -19,13 +19,13 @@
 
 package com.jd.list.activity
 
-import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 
-import com.jd.core.base.BaseActivity
+import com.jd.core.mvvm.v.BaseActivity
 import com.jd.list.R
 import com.jd.list.adapters.CardAdapter
 import com.jd.list.utils.BaseUtils
-import com.jd.list.utils.DemoConfiguration
 import com.jd.list.view.shimmer.ShimmerRecyclerView
 
 import androidx.recyclerview.widget.RecyclerView
@@ -35,10 +35,11 @@ class DemoActivity : BaseActivity() {
     private var shimmerRecycler: ShimmerRecyclerView? = null
     private var mAdapter: CardAdapter? = null
 
-    override fun layoutId(): Int {
-            val type = type
-            val demoConfiguration = BaseUtils.getDemoConfiguration(type, this)
-            return demoConfiguration!!.layoutResource
+    override fun layoutView(): View {
+        val type = type
+        val demoConfiguration = BaseUtils.getDemoConfiguration(type, this)
+        val layoutId = demoConfiguration!!.layoutResource
+        return LayoutInflater.from(this).inflate(layoutId,null)
     }
 
     private val type: Int

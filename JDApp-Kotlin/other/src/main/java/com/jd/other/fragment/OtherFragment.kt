@@ -1,71 +1,75 @@
 package com.jd.other.fragment
 
-
-import androidx.fragment.app.Fragment
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ListView
 import android.widget.Toast
-
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jd.core.base.BaseFragment
+import com.jd.config.RoutePath
+import com.jd.core.mvvm.v.BaseFragment
 import com.jd.core.base.adapter.BaseListViewAdapter
-import com.jd.core.network.ServiceGenerator
+import com.jd.core.log.LogUtils
+import com.jd.core.network.Network.Companion.instance
 import com.jd.other.R
 import com.jd.other.network.BookService
 import com.jd.other.viewholder.OtherViewHolder
-import kotlinx.android.synthetic.main.fragment_other.*
-
-import java.io.IOException
-import java.util.ArrayList
-import java.util.HashMap
-
+import com.jd.other.vm.OtherViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 /**
  * A simple [Fragment] subclass.
  */
 class OtherFragment : BaseFragment() {
+    private var listView: ListView? = null
+    private val items: MutableList<Map<String, Any>> = ArrayList()
 
-    private val items = ArrayList<Map<String, Any>>()
-
-    override val layoutId: Int
-        get() = R.layout.fragment_other
+    private val viewModel: OtherViewModel by inject()
 
     override fun initView(view: View) {
-        this.navigationBar.setBackViewHidden(true)
-        this.navigationBar.setTitle("功能")
-
-        this.initData()
-        val lazyAdapter = object : BaseListViewAdapter(this.activity!!, this.items, OtherViewHolder::class.java) {
-            override fun indexOfLayoutsAtPosition(position: Int): Int {
-                return 0
+        listView = view.findViewById(R.id.simpleListView)
+        navigationBar.setBackViewHidden(true)
+        navigationBar.setTitle("功能")
+        initData()
+        val lazyAdapter: BaseListViewAdapter =
+            object : BaseListViewAdapter(requireActivity(), items, OtherViewHolder::class.java) {
+                override fun indexOfLayoutsAtPosition(position: Int): Int {
+                    return 0
+                }
             }
-        }
-        simpleListView!!.adapter = lazyAdapter //导入
+        //导入
+        listView?.adapter = lazyAdapter
 
         //点击事件
-        simpleListView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            val item = this@OtherFragment.items[position]
+        listView?.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            val item = items[position]
             val click = item["action"] as OnOtherClick?
             click?.onClick()
         }
     }
 
     override fun loadData() {
+
     }
 
+    override fun layoutView(): View {
+        return LayoutInflater.from(requireContext()).inflate(R.layout.fragment_other,null)
+    }
 
     override fun preferredNavigationBarHidden(): Boolean {
         return false
     }
 
     private fun initData() {
-        val item1 = HashMap<String, Any>()
+        val item1: MutableMap<String, Any> = HashMap()
         item1["title"] = "网络"
         item1["action"] = object : OnOtherClick {
             override fun onClick() {
@@ -74,63 +78,75 @@ class OtherFragment : BaseFragment() {
         }
         items.add(item1)
 
-        val item2 = HashMap<String, Any>()
+        val item11: MutableMap<String, Any> = HashMap()
+        item11["title"] = "网络2"
+        item11["action"] = object : OnOtherClick {
+            override fun onClick() {
+                testNetwork2()
+            }
+        }
+        items.add(item11)
+
+
+        val item2: MutableMap<String, Any> = HashMap()
         item2["title"] = "路由"
         item2["action"] = object : OnOtherClick {
             override fun onClick() {
-                ARouter.getInstance().build("/test/activity1").navigation()
+                ARouter.getInstance().build(RoutePath.List.TEST).navigation(context)
             }
         }
         items.add(item2)
-
-        val item3 = HashMap<String, Any>()
+        val item3: MutableMap<String, Any> = HashMap()
         item3["title"] = "功能菜单"
         item3["action"] = object : OnOtherClick {
-            override fun onClick() {
-
-            }
+            override fun onClick() {}
         }
         items.add(item3)
-
-        val item4 = HashMap<String, Any>()
+        val item4: MutableMap<String, Any> = HashMap()
         item4["title"] = "设置"
         item4["action"] = object : OnOtherClick {
-            override fun onClick() {
-
-            }
+            override fun onClick() {}
         }
         items.add(item4)
     }
 
 
+    /**
+     * 第一种用法
+     */
     private fun testNetwork() {
-        val call = ServiceGenerator.createService(BookService::class.java).getShop("63.223.108.42")
-        Toast.makeText(activity,"网络请求开始",Toast.LENGTH_LONG).show();
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                try {
-                    val body = response.body()
-                    if (body != null) {
-                        val s = body.string()
-                        Log.e("network", s)
-                    }
-                    Toast.makeText(activity,"网络请求成功",Toast.LENGTH_LONG).show();
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("network", t.toString())
-                Toast.makeText(activity,"网络请求失败",Toast.LENGTH_LONG).show();
-            }
-        })
+        val result =  instance.createService(BookService::class.java).getShop("63.223.108.42")
+        result?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
+        val  s = result?.subscribe({
+            Toast.makeText(this@OtherFragment.context, it.data, Toast.LENGTH_LONG).show()
+        }) {
+            Toast.makeText(this@OtherFragment.context, it.message, Toast.LENGTH_LONG).show()
+        }
     }
 
+    /**
+     * 第二种用法
+     */
+    fun getShop() {
+        lifecycleScope.launch {
+            val responseAsync = async ( SupervisorJob() + Dispatchers.IO) {
+                return@async instance.createService(BookService::class.java).getShop2("63.223.108.42")
+            }
+            val result = responseAsync.await()
+            LogUtils.d("network",result.data)
+        }
+    }
+
+    private fun testNetwork2(){
+        viewModel.text.observe(viewLifecycleOwner
+        ) { t ->
+            LogUtils.d("network", "数据变化了$t")
+        }
+        viewModel.request()
+    }
 
     ///////////////////////////////////////
     interface OnOtherClick {
         fun onClick()
     }
-}// Required empty public constructor
+}
